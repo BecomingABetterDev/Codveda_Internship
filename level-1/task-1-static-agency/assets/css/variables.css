@@ -1,0 +1,71 @@
+:root {
+  /* --- 1. COLOR PALETTE (Cyber-Minimalist Dark Slate) --- */
+  --bg-primary: #090a10;
+  /* Deep titanium-void background */
+  --bg-secondary: #11131c;
+  /* Clean slate elevated cards */
+  --bg-tertiary: #1b1e2b;
+  /* High-contrast border elements & inputs */
+  --border-subtle: #1c1f2e;
+  /* Precision hairline grid borders */
+  --text-primary: #f8fafc;
+  /* Pure bright titanium for maximum readability */
+  --text-secondary: #94a3b8;
+  /* Soft premium slate gray for long-form reading */
+  --text-muted: #627288;
+  /* Subtle muted metadata and utility labels */
+  --accent: #00d4e0;
+  /* Hyper-performance Cyber Cyan */
+  --accent-hover: #00cbd6;
+  /* Saturated interactive cyber state */
+  --accent-alpha: rgba(0, 240, 255, 0.06);
+  /* Highly immersive visual overlay */
+  --color-blue: #3b82f6;
+  --color-blue-muted: rgba(59, 130, 246, 0.12);
+  --color-orange: #f59e0b;
+  --color-orange-muted: rgba(245, 158, 11, 0.12);
+  --color-green: #00f0ff;
+  --color-green-muted: rgba(0, 240, 255, 0.12);
+  /* --- 2. TYPOGRAPHY & SCALING --- */
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", Menlo, monospace;
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-lg: 1.125rem;
+  --fs-xl: 1.25rem;
+  --fs-2xl: 1.5rem;
+  --fs-3xl: 2rem;
+  --fs-4xl: 2.5rem;
+  --fs-5xl: 3rem;
+  --fs-display: 3.5rem;
+  --fw-normal: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+  /* --- 3. SPACING & MARGINS (8px Grid System) --- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  /* --- 4. BORDER RADII (Sharp Premium Aesthetic) --- */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  /* --- 5. MICRO-INTERACTION & TRANSITIONS --- */
+  /* Using cubic-bezier rather than 'ease-in' for custom premium motion feel */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  /* --- 6. LAYER ARCHITECTURE (Z-Index Stack) --- */
+  --z-negative: -1;
+  --z-base: 1;
+  --z-dropdown: 10;
+  --z-sticky: 100;
+  /* Fixed Navigation bar context */
+  --z-modal: 1000;
+  /* Future Task 3 overlay modal box context */
+}

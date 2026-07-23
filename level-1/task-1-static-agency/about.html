@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="About SpeedCraft Labs - Our core methodology, performance philosophy, and engineering standards." />
+    <meta name="keywords" content="Web Performance engineering, Core Web Vitals, performance architecture" />
+    <meta name="author" content="Eyob Desalegn" />
+    <title>About | SpeedCraft Labs</title>
+    <link rel="stylesheet" href="assets/css/variables.css" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+
+<body>
+    <div class="custom-cursor"></div>
+    <div class="custom-cursor-ring"></div>
+
+    <header class="header">
+        <nav class="header__nav container">
+            <div class="header__logo">
+                <a href="index.html" class="header__logo-link">SpeedCraft<span class="header__logo-span">Labs</span></a
+          >
+        </div>
+        <ul
+          class="header__links"
+          role="list"
+        >
+          <li>
+            <a
+              href="index.html"
+              class="header__link"
+              >Home</a
+            >
+          </li>
+          <li>
+            <a
+              href="about.html"
+              class="header__link header__link--active"
+              >About</a
+            >
+          </li>
+          <li>
+            <a
+              href="contact.html"
+              class="header__link"
+              >Contact</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main
+      id="main-content"
+      class="container"
+    >
+      <section
+        class="hero hero--center"
+        style="margin-bottom: 10rem; padding-top: 10rem"
+        aria-labelledby="about-hero-heading"
+      >
+        <div
+          class="position hero__content hero__content--center"
+          style="display: flex; flex-direction: column; align-items: center"
+        >
+          <span class="lab__tag">Our Manifesto</span>
+          <h1
+            id="about-hero-heading"
+            class="hero__title"
+          >
+            Engineered to Eliminate
+            <span class="hero__title--accent">Digital Inertia</span>.
+          </h1>
+          <p class="hero__lead">
+            We believe speed is the most honest feature a website can have.
+            Every kilobyte shipped should earn its place — serving your users,
+            not slowing them down.
+          </p>
+        </div>
+      </section>
+
+      <section
+        class="metrics"
+        id="Philosophy"
+        aria-labelledby="philosophy-heading"
+      >
+        <div class="philosophy-block">
+          <div class="philosophy-block__header">
+            <h2
+              id="philosophy-heading"
+              class="metrics__title"
+            >
+              The Core <span class="text-highlight">Philosophy</span>
+            </h2>
+            <p class="metrics__subtitle">
+              Why bare-metal optimization matters in the modern web ecosystem.
+            </p>
+          </div>
+
+          <div class="philosophy-block__description">
+            <p>
+              The modern web is drowning in excess. Frameworks and bundles
+              promise convenience but often deliver delay. At SpeedCraft Labs,
+              we cut through the noise — building with native browser power,
+              lean assets, and layouts that stay rock‑solid under load.
+            </p>
+            <p>
+              <span class="text-bold">SpeedCraft Labs</span> was founded to
+              break this cycle. We operate at the intersection of native browser
+              APIs, modern layout engines, and aggressive asset optimization. By
+              engineering solutions that run directly on the browser's bare
+              metal, we secure near-zero visual jank and sub-second paint times
+              across all devices.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="metrics"
+        aria-labelledby="pillars-heading"
+      >
+        <div class="metrics__header">
+          <h2
+            id="pillars-heading"
+            class="metrics__title"
+          >
+            Our <span class="text-highlight">Architectural Pillars</span>
+          </h2>
+          <p class="metrics__subtitle">
+            Our work is guided by principles we don’t compromise on. These
+            pillars shape every audit, every line of code, and every deployment.
+          </p>
+        </div>
+
+        <div class="metrics__grid">
+          <article class="metric-card">
+            <div class="metric-card__value">01</div>
+            <h3 class="metric-card__title">Native Over Runtime</h3>
+            <p class="metric-card__desc">
+              We prioritize native browser APIs, semantic HTML5 structure, and
+              modern CSS over external abstractions and resource-heavy
+              dependencies.
+            </p>
+          </article>
+
+          <article class="metric-card">
+            <div class="metric-card__value">02</div>
+            <h3 class="metric-card__title">Aggressive Budgeting</h3>
+            <p class="metric-card__desc">
+              Every feature, font, and asset must defend its weight against a
+              strict performance budget.
+              <span class="text-warning"
+                >If it does not directly add conversion value, it gets
+                cut.</span
+              >
+            </p>
+          </article>
+
+          <article class="metric-card">
+            <div class="metric-card__value">03</div>
+            <h3 class="metric-card__title">Deterministic Layouts</h3>
+            <p class="metric-card__desc">
+              We build layouts with mathematical certainty. Aspect ratios and
+              render paths are hard-coded to ensure zero shifts during asset
+              streaming.
+            </p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer__container">
+        <div class="footer__links">
+          <a href="index.html">Home</a>
+                <a href="contact.html">Contact</a>
+                <a href="#Philosophy">Philosophy</a>
+            </div>
+
+            <div class="footer__social">
+                <a href="https://linkedin.com/in/eyob-desalegn" aria-label="LinkedIn">
+                    <!-- LinkedIn SVG -->
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" width="18" height="18">
+              <path
+                d="M4.98 3.5C4.98 5 3.9 6 2.5 6S0 5 0 3.5 1.1 1 2.5 1s2.48 1 2.48 2.5zM.5 8h4V24h-4V8zm7.5 0h3.8v2.2h.1c.5-1 1.7-2.2 3.5-2.2 3.7 0 4.4 2.4 4.4 5.5V24h-4v-8.2c0-2-0.1-4.5-2.7-4.5-2.7 0-3.1 2.1-3.1 4.3V24h-4V8z"
+              />
+            </svg>
+                </a>
+                <a href="https://github.com/BecomingABetterDev" aria-label="GitHub">
+                    <!-- GitHub SVG -->
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" width="18" height="18">
+              <path
+                d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.2-1.2-1.5-1.2-1.5-1-.7.1-.7.1-.7 1.1.1 1.7 1.1 1.7 1.1 1 .1 1.6-.7 1.8-1.1.1-.7.4-1.1.7-1.3-2.6-.3-5.3-1.3-5.3-5.9 0-1.3.5-2.4 1.2-3.3-.1-.3-.5-1.6.1-3.3 0 0 1-.3 3.4 1.2 1-.3 2-.5 3-.5s2 .2 3 .5c2.4-1.5 3.4-1.2 3.4-1.2.6 1.7.2 3 .1 3.3.7.9 1.2 2 1.2 3.3 0 4.6-2.7 5.6-5.3 5.9.4.3.7.9.7 1.8v2.7c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"
+              />
+            </svg>
+                </a>
+            </div>
+
+            <div class="footer__text">
+                <p>© 2026 SpeedCraft Labs. All rights reserved.</p>
+                <p class="footer__author">Built for speed, engineered for growth.</p>
+            </div>
+            </div>
+            </footer>
+</body>
+
+</html>
