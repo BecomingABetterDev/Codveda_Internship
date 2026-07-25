@@ -1,86 +1,31 @@
 module.exports = {
-    root: true,
     env: {
         browser: true,
-        es2021: true,
-        node: true,
+        es6: true,
+        node: true
     },
     parserOptions: {
-        ecmaVersion: 2021,
+        ecmaVersion: 2019,
         sourceType: "module",
-        ecmaFeatures: {
-            jsx: true,
-        },
+        ecmaFeatures: { jsx: true }
     },
-    settings: {
-        react: {
-            version: "detect",
-        },
-    },
+    plugins: ["react", "react-hooks", "jsx-a11y", "import"],
     extends: [
         "eslint:recommended",
         "plugin:react/recommended",
-        "plugin:react-hooks/recommended",
         "plugin:jsx-a11y/recommended",
         "plugin:import/errors",
-        "plugin:import/warnings",
-        "plugin:import/react",
-        "plugin:prettier/recommended",
+        "plugin:import/warnings"
     ],
-    plugins: ["react", "react-hooks", "jsx-a11y", "import", "prettier"],
     rules: {
-        // Enforce Prettier formatting as ESLint rule
-        "prettier/prettier": ["error"],
-
-        // React / JSX
-        "react/jsx-uses-react": "off",
-        "react/react-in-jsx-scope": "off",
-
-        // Hooks
+        // React hooks rules (manual, since no recommended config in ESLint 6 era)
         "react-hooks/rules-of-hooks": "error",
         "react-hooks/exhaustive-deps": "warn",
 
-        // Import rules
-        "import/no-unresolved": "error",
-        "import/order": [
-            "warn",
-            {
-                groups: [
-                    "builtin",
-                    "external",
-                    "internal",
-                    "parent",
-                    "sibling",
-                    "index",
-                ],
-                "newlines-between": "always",
-            },
-        ],
-
-        // Best practices
-        "no-console": ["warn", { allow: ["warn", "error"] }],
+        // General hygiene
+        "no-console": "warn",
         "no-debugger": "error",
-        "prefer-const": "warn",
-        "no-var": "error",
-        eqeqeq: ["error", "always"],
-
-        // Accessibility
-        "jsx-a11y/anchor-is-valid": [
-            "warn",
-            {
-                components: ["Link"],
-                specialLink: ["to", "hrefLeft", "hrefRight"],
-                aspects: ["noHref", "invalidHref", "preferButton"],
-            },
-        ],
-
-        // Stylistic choices (non-blocking)
-        "react/prop-types": "off", // we use TypeScript or rely on PropTypes later; disable for now
+        "eqeqeq": ["error", "always"]
     },
-    overrides: [{
-        files: ["*.ts", "*.tsx"],
-        parser: "@typescript-eslint/parser",
-        plugins: ["@typescript-eslint"],
-        extends: ["plugin:@typescript-eslint/recommended"],
-    }, ],
+    settings: { react: { version: "detect" } }
 };
