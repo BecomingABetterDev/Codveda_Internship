@@ -1,0 +1,28 @@
+@import url(../../../shared/styles/variables.css);
+.dropdown {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    margin-top: var(--space-2);
+}
+
+.dropdown-item {
+    padding: var(--space-2);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+}
+
+.dropdown-item:hover {
+    background: var(--bg-hover);
+}
+
+.dropdown-city {
+    font-weight: var(--fw-medium)
+}
+
+.dropdown-country {
+    font-size: 11px;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+}

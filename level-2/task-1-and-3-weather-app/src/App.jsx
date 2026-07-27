@@ -1,7 +1,8 @@
 import React from 'react';
+import LocationDropdown from './features/search/components/LocationDropdown';
 
 const App = () => {
-  return <div>App</div>;
+  return <>Heyy</>;
 };
 
 export default App;
