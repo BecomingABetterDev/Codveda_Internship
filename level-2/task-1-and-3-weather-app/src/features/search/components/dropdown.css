@@ -1,28 +1,58 @@
 @import url(../../../shared/styles/variables.css);
 .dropdown {
-    background: var(--bg-surface);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-sm);
-    margin-top: var(--space-2);
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  margin-top: var(--space-2);
+  box-shadow: var(--shadow-sm);
+  max-height: 240px;
+  overflow-y: auto;
+  animation: fadeIn 0.2s ease-out;
 }
 
 .dropdown-item {
-    padding: var(--space-2);
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
+  padding: var(--space-2) var(--space-3);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--fs-sm);
+  transition: background-color var(--transition-fast);
 }
 
 .dropdown-item:hover {
-    background: var(--bg-hover);
+  background-color: var(--bg-hover);
 }
 
-.dropdown-city {
-    font-weight: var(--fw-medium)
+.dropdown-name {
+  font-weight: var(--fw-medium);
+  color: var(--text-primary);
 }
 
 .dropdown-country {
-    font-size: 11px;
-    text-transform: uppercase;
-    color: var(--text-secondary);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+}
+
+.dropdown-status {
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+}
+
+.dropdown-status.error {
+  color: var(--color-error);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
