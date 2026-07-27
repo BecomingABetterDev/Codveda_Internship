@@ -1,4 +1,3 @@
-@import url(../../../shared/styles/variables.css);
 .dropdown {
   background-color: var(--bg-surface);
   border: 1px solid var(--border-subtle);

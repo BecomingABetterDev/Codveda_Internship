@@ -1,91 +1,90 @@
-@import url(../../../shared/styles/variables.css);
 .weather-hero {
-    padding: var(--space-4);
-    border-radius: var(--radius-md);
-    background-color: var(--bg-surface);
-    border: 1px solid var(--border-subtle);
-    box-shadow: var(--shadow-sm);
-    margin-top: var(--space-4);
-    animation: fadeIn 0.3s ease-out;
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-sm);
+  margin-top: var(--space-4);
+  animation: fadeIn 0.6s ease-out;
 }
 
 .hero-header {
-    margin-bottom: var(--space-3);
+  margin-bottom: var(--space-3);
 }
 
 .hero-location {
-    font-size: var(--fs-lg);
-    font-weight: var(--fw-semibold);
-    color: var(--text-primary);
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
 }
 
 .hero-country {
-    font-size: var(--fs-sm);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--text-secondary);
+  font-size: var(--fs-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
 }
 
 .hero-time {
-    font-size: var(--fs-sm);
-    color: var(--text-muted);
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
 }
 
 .hero-main {
-    align-items: center;
-    margin-bottom: var(--space-3);
+  align-items: center;
+  margin-bottom: var(--space-3);
 }
 
 .hero-temp {
-    font-variant-numeric: tabular-nums;
-    font-size: 64px;
-    font-weight: var(--fw-bold);
-    line-height: 1;
-    display: flex;
-    align-items: flex-start;
+  font-variant-numeric: tabular-nums;
+  font-size: 64px;
+  font-weight: var(--fw-bold);
+  line-height: 1;
+  display: flex;
+  align-items: flex-start;
 }
 
 .temp-unit {
-    font-size: 24px;
-    margin-left: var(--space-1);
-    color: var(--text-secondary);
+  font-size: 24px;
+  margin-left: var(--space-1);
+  color: var(--text-secondary);
 }
 
 .hero-icon {
-    font-size: 48px;
+  font-size: 48px;
 }
 
 .hero-meta {
-    font-size: var(--fs-sm);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--text-secondary);
-    gap: var(--space-4);
+  font-size: var(--fs-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  gap: var(--space-4);
 }
 
 .meta-value {
-    font-weight: var(--fw-medium);
-    color: var(--text-primary);
+  font-weight: var(--fw-medium);
+  color: var(--text-primary);
 }
 
 .hero-status {
-    padding: var(--space-3);
-    text-align: center;
-    font-size: var(--fs-sm);
-    color: var(--text-secondary);
+  padding: var(--space-3);
+  text-align: center;
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
 }
 
 .hero-status.error {
-    color: var(--color-error);
+  color: var(--color-error);
 }
 
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(8px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

@@ -27,6 +27,6 @@
         "eslint-plugin-react": "^7.20.0",
         "eslint-plugin-react-hooks": "^2.5.1",
         "prettier": "^2.8.8",
-        "vite": "^2.9.15"
+        "vite": "^2.9.18"
     }
 }
