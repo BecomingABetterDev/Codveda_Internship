@@ -1,34 +1,25 @@
 /* src/shared/styles/variables.css
-   AeroCast — Light theme tokens
-   Clean, neutral, professional palette; mobile-first breakpoints
+   AeroCast — Light theme tokens (backwards compatible + enhancements)
 */
 
 :root {
-    /* Colors */
+    /* --- existing tokens (unchanged) --- */
     --color-canvas: #f8fafc;
-    /* page background */
     --color-surface: #ffffff;
-    /* card surface */
     --color-border: #e2e8f0;
-    /* hairline border */
     --color-text: #0f172a;
-    /* primary text (deep slate) */
     --color-muted: #475569;
-    /* secondary text */
     --color-accent: #0284c7;
-    /* sky-cobalt accent */
     --color-accent-600: #0369a1;
     --color-accent-alpha: rgba(2, 132, 199, 0.12);
     --color-success: #10b981;
     --color-warning: #f59e0b;
     --color-danger: #ef4444;
-    /* Semantic */
     --bg-primary: var(--color-canvas);
     --bg-surface: var(--color-surface);
     --border-subtle: var(--color-border);
     --text-primary: var(--color-text);
     --text-secondary: var(--color-muted);
-    /* Typography */
     --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', 'Courier New', monospace;
     --fs-xs: 12px;
@@ -42,7 +33,6 @@
     --fw-medium: 500;
     --fw-semibold: 600;
     --fw-bold: 700;
-    /* Spacing scale (8px base) */
     --space-1: 4px;
     --space-2: 8px;
     --space-3: 12px;
@@ -52,21 +42,50 @@
     --space-8: 32px;
     --space-12: 48px;
     --space-16: 64px;
-    /* Radii & shadows */
     --radius-sm: 6px;
     --radius-md: 10px;
     --radius-lg: 14px;
     --radius-full: 9999px;
     --shadow-sm: 0 4px 10px rgba(15, 23, 42, 0.06);
     --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.08);
-    /* Breakpoints (mobile-first) */
     --bp-sm: 480px;
     --bp-md: 768px;
     --bp-lg: 1024px;
     --bp-xl: 1280px;
-    /* Misc */
     --container-max: 1200px;
     --transition-fast: 180ms;
     --transition-normal: 300ms;
     --z-sticky: 999;
+    /* --- new tokens (safe additions) --- */
+    /* Typography and numeric rendering */
+    --font-display: 'Inter', system-ui, -apple-system;
+    --numeric-font-variant: tabular-nums;
+    --fs-hero-clamp: clamp(36px, 6vw, 64px);
+    /* Shadows and subtle surfaces */
+    --shadow-xs: 0 1px 2px rgba(12, 18, 28, 0.04);
+    --shadow-card: 0 6px 18px rgba(12, 18, 28, 0.06);
+    /* Accent palette for contextual color mapping */
+    --accent-clear: #2563eb;
+    /* indigo for clear */
+    --accent-rain: #0f172a;
+    /* deep slate-blue for rain */
+    --accent-cloud: #475569;
+    /* muted gray for cloudy */
+    --accent-sunset: #7c3aed;
+    /* muted indigo for warm times */
+    /* Highlight surface for hero metric */
+    --bg-highlight: #eef6ff;
+    /* Motion and timing */
+    --motion-fast: 120ms;
+    --motion-medium: 180ms;
+    --motion-slow: 260ms;
+    /* Edge masks for carousels */
+    --mask-width: 48px;
+    /* Small UI tokens */
+    --chip-radius: 9999px;
+    --hairline-border: 1px solid var(--border-subtle);
+    /* Accessibility */
+    --focus-ring: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    /* Utility */
+    --card-padding: var(--space-3);
 }
