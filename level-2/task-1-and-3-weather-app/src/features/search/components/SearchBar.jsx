@@ -1,4 +1,3 @@
-// src/features/search/components/SearchBar.jsx
 import { useState } from 'react';
 import { useGeocoding } from '../hooks/useGeocoding';
 import LocationDropdown from './LocationDropdown';
@@ -6,7 +5,19 @@ import './search.css';
 
 export default function SearchBar({ onSelect }) {
   const [query, setQuery] = useState('');
+  const [showDropdown, setShowDropdown] = useState(false); // 👈 new state
   const { data, loading, error } = useGeocoding(query);
+
+  const handleChange = (e) => {
+    setQuery(e.target.value);
+    setShowDropdown(true); // show dropdown when typing
+  };
+
+  const handleSelect = (loc) => {
+    setQuery(`${loc.name}, ${loc.country}`);
+    setShowDropdown(false); // hide dropdown after selection
+    onSelect(loc);
+  };
 
   return (
     <div className="search-bar">
@@ -14,11 +25,13 @@ export default function SearchBar({ onSelect }) {
       <input
         type="text"
         value={query}
-        onChange={(e) => setQuery(e.target.value)}
+        onChange={handleChange}
         placeholder="Search city..."
         className="search-input"
       />
-      <LocationDropdown results={data} loading={loading} error={error} onSelect={onSelect} />
+      {showDropdown && query.trim().length > 1 && (
+        <LocationDropdown results={data} loading={loading} error={error} onSelect={handleSelect} />
+      )}
     </div>
   );
 }

@@ -1,5 +1,6 @@
 // src/features/search/components/LocationDropdown.jsx
 import './dropdown.css';
+
 export default function LocationDropdown({ results, loading, error, onSelect }) {
   if (loading) return <div className="dropdown">Loading...</div>;
   if (error) return <div className="dropdown error">{error}</div>;

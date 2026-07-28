@@ -1,4 +1,8 @@
 .dropdown {
+  position: absolute;
+  top: 100%; /* directly below input */
+  left: 0;
+  right: 0;
   background-color: var(--bg-surface);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
@@ -7,6 +11,10 @@
   max-height: 240px;
   overflow-y: auto;
   animation: fadeIn 0.2s ease-out;
+}
+
+div.dropdown {
+  padding: var(--space-2) var(--space-3);
 }
 
 .dropdown-item {
