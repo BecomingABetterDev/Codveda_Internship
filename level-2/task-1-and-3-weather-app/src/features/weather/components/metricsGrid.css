@@ -1,49 +1,75 @@
-.metrics-grid {
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: var(--space-4);
-  margin-top: var(--space-4);
+.metrics-col {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: var(--space-4);
+    width: 100%;
 }
 
 .metric-card {
-  background-color: var(--bg-surface);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-sm);
-  padding: var(--space-3);
-  box-shadow: var(--shadow-xs);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  animation: fadeIn 0.3s ease-out;
+    background: var(--bg-surface);
+    border-radius: var(--radius-md);
+    padding: var(--space-4);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-subtle);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    transition: transform var(--motion-fast), box-shadow var(--motion-fast);
 }
 
-.metric-label {
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--text-secondary);
-  margin-bottom: var(--space-1);
+span.metric-label {
+    font-size: var(--fs-xs)
+}
+
+.metric-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.metric-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-secondary);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: var(--space-1);
 }
 
 .metric-value {
-  font-variant-numeric: tabular-nums;
-  font-size: 24px;
-  font-weight: var(--fw-semibold);
-  color: var(--text-primary);
+    font-size: 22px;
+    font-weight: var(--fw-bold);
+    color: var(--text-primary);
 }
 
-.metric-hero {
-  grid-column: span 2;
-  background-color: var(--bg-highlight);
-  border: 1px solid var(--color-accent);
+.metric-value.precip {
+    margin: 0 auto;
+    font-size: var(--fs-display);
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.precip-text {
+    margin: .3rem auto;
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-semibold);
+}
+
+.metric-value-hero {
+    font-size: 28px;
+    font-weight: var(--fw-bold);
+    color: var(--text-primary);
+}
+
+.metric-unit {
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-semibold);
+    color: var(--text-secondary);
+    margin-left: 4px;
+}
+
+.metric-advisory {
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--text-secondary);
 }

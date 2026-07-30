@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import Header from './public/Layout/Header';
 import Footer from './public/Layout/Footer';
 import WeatherHero from './features/weather/components/WeatherHero';
-import MetricsGrid from './features/weather/components/MetricsGrid';
 import HourlyCarousel from './features/weather/components/HourlyCarousel';
 import DailyForecast from './features/weather/components/DailyForecast';
 import { getWeather } from './shared/services/api';
 import EmptyState from './public/Layout/EmptyState';
+import MetricsColumn from './features/weather/components/MetricsColumn';
 
 const App = () => {
   const [selectedLocation, setSelectedLocation] = useState(null);
@@ -25,27 +25,31 @@ const App = () => {
   }, [selectedLocation]);
 
   return (
-    <div className="app-layout">
+    <>
       <Header onSelect={setSelectedLocation} />
+      <div className="app-layout">
+        <main className="app-main">
+          {loading && <div className="hero-status">Loading weather...</div>}
+          {error && <div className="hero-status error">{error}</div>}
 
-      <main className="app-main">
-        {loading && <div className="hero-status">Loading weather...</div>}
-        {error && <div className="hero-status error">{error}</div>}
+          {!selectedLocation && <EmptyState />}
 
-        {!selectedLocation && <EmptyState />}
+          {selectedLocation && weather && (
+            <>
+              <div className="top-grid">
+                <WeatherHero location={selectedLocation} weather={weather} />
+                <MetricsColumn weather={weather} />
+              </div>
 
-        {selectedLocation && weather && (
-          <>
-            <WeatherHero location={selectedLocation} weather={weather} />
-            <MetricsGrid weather={weather} />
-            <HourlyCarousel weather={weather} />
-            <DailyForecast weather={weather} />
-          </>
-        )}
-      </main>
+              <HourlyCarousel weather={weather} />
+              <DailyForecast weather={weather} />
+            </>
+          )}
+        </main>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </>
   );
 };
 
