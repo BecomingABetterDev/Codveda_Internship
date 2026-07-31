@@ -74,18 +74,6 @@ export default function WeatherHero({ location, weather, unit = 'C' }) {
           borderColor: meta.accent,
         }}
       >
-        <svg
-          className="hero-decor"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 1440 320"
-          preserveAspectRatio="none"
-        >
-          <path
-            fill="var(--bg-highlight)"
-            fillOpacity="1"
-            d="M0,160L80,165.3C160,171,320,181,480,176C640,171,800,149,960,154.7C1120,160,1280,192,1360,208L1440,224V320H0Z"
-          ></path>
-        </svg>
         <div className="hero-top">
           <div className="hero-brand">
             <h3 className="hero-location">{location.name}</h3>
