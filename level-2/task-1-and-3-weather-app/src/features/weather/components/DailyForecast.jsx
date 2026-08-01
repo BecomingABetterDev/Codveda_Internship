@@ -2,8 +2,9 @@
 import React, { useState, useMemo } from 'react';
 import Icon from '@/shared/components/Icons';
 import './dailyForecast.css';
+import { toFahrenheit } from '../utils/convert';
 
-export default function DailyForecast({ weather, unit = 'C' }) {
+export default function DailyForecast({ weather, unit }) {
   if (!weather || !weather.daily) return null;
 
   const {
@@ -85,6 +86,13 @@ function ForecastCard({ day, unit, index, open, onToggle }) {
 
   const iconName = codeToIcon(day.code);
 
+  const max = Number.isFinite(day.max)
+    ? Math.round(unit === 'C' ? day.max : toFahrenheit(day.max))
+    : '—';
+  const min = Number.isFinite(day.min)
+    ? Math.round(unit === 'C' ? day.min : toFahrenheit(day.min))
+    : '—';
+
   return (
     <article className={`forecast-card ${open ? 'open' : ''}`} aria-expanded={open}>
       <div className="forecast-inner">
@@ -109,10 +117,10 @@ function ForecastCard({ day, unit, index, open, onToggle }) {
                   <Icon name={iconName} size={40} />
                 </div>
                 <span className="temp-max">
-                  {Number.isFinite(day.max) ? Math.round(day.max) : '—'}°{unit}
+                  {max}°{unit}
                 </span>
                 <span className="temp-min">
-                  / {Number.isFinite(day.min) ? Math.round(day.min) : '—'}°
+                  / {min}°{unit}
                 </span>
               </div>
             </div>

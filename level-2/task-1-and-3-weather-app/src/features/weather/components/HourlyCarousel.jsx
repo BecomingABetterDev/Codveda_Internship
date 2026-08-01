@@ -1,8 +1,9 @@
 import React, { useState, useMemo } from 'react';
 import './hourlyCarousel.css';
 import Icon from '@/shared/components/Icons';
+import { toFahrenheit } from '../utils/convert';
 
-export default function HourlyCarousel({ weather }) {
+export default function HourlyCarousel({ weather, unit }) {
   if (!weather || !weather.hourly) return null;
 
   const { time, temperature_2m, precipitation_probability } = weather.hourly;
@@ -14,8 +15,8 @@ export default function HourlyCarousel({ weather }) {
       const val = arr[currentIndex + i];
       return typeof val === 'number' && !isNaN(val) ? val : 0;
     });
-
-  const temps = safeSlice(temperature_2m);
+  const tempsRaw = safeSlice(temperature_2m);
+  const temps = unit === 'C' ? tempsRaw : tempsRaw.map((t) => Math.round(toFahrenheit(t)));
   const precip = safeSlice(precipitation_probability);
 
   // Catmull-Rom to Bezier conversion for smooth, controlled curves
@@ -105,7 +106,7 @@ export default function HourlyCarousel({ weather }) {
             </span>
 
             <span className="hour-temp" aria-hidden>
-              {temps[i]}°
+              {temps[i]}°{unit}
             </span>
 
             <div className="hour-meta" aria-hidden>
@@ -236,10 +237,10 @@ export default function HourlyCarousel({ weather }) {
 
         <div className="sparkline-meta">
           <span>
-            Temp Min: <span className="meta-value"> {Math.min(...temps)}</span>°
+            Temp Min: <span className="meta-value"> {Math.min(...temps)}</span>° {unit}
           </span>
           <span>
-            Temp Max: <span className="meta-value">{Math.max(...temps)}</span>°
+            Temp Max: <span className="meta-value">{Math.max(...temps)}</span>° {unit}
           </span>
           <span>
             Rain Min: <span className="meta-value">{Math.min(...precip)}</span>%

@@ -13,6 +13,7 @@ const App = () => {
   const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [unit, setUnit] = useState('C');
 
   useEffect(() => {
     if (!selectedLocation) return;
@@ -24,9 +25,17 @@ const App = () => {
       .finally(() => setLoading(false));
   }, [selectedLocation]);
 
+  const toggleUnit = (next) => {
+    if (typeof next === 'string') {
+      setUnit(next); // from <select>
+    } else {
+      setUnit((u) => (u === 'C' ? 'F' : 'C')); // from button
+    }
+  };
+
   return (
     <>
-      <Header onSelect={setSelectedLocation} />
+      <Header onSelect={setSelectedLocation} unit={unit} onToggleUnit={toggleUnit} />
       <div className="app-layout">
         <main className="app-main">
           {loading && <div className="hero-status">Loading weather...</div>}
@@ -37,12 +46,12 @@ const App = () => {
           {selectedLocation && weather && (
             <>
               <div className="top-grid">
-                <WeatherHero location={selectedLocation} weather={weather} />
-                <MetricsColumn weather={weather} />
+                <WeatherHero location={selectedLocation} unit={unit} weather={weather} />
+                <MetricsColumn weather={weather} unit={unit} />
               </div>
 
-              <HourlyCarousel weather={weather} />
-              <DailyForecast weather={weather} />
+              <HourlyCarousel weather={weather} unit={unit} />
+              <DailyForecast weather={weather} unit={unit} />
             </>
           )}
         </main>

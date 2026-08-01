@@ -2,16 +2,19 @@ import Icon from '@/shared/components/Icons';
 import React from 'react';
 import './metricsGrid.css';
 
-export default function MetricsColumn({ weather }) {
+export default function MetricsColumn({ weather, unit }) {
   if (!weather) return null;
   const { current, hourly, daily } = weather;
+
+  const wind =
+    unit === 'C' ? weather.current.windspeed : Math.round(weather.current.windspeed / 1.609); // km/h → mph
+
   const currentIndex = hourly.time.indexOf(current.time.split(':', 1) + ':00');
 
   const humidity = currentIndex !== -1 ? hourly.relative_humidity_2m[currentIndex] : null;
   const pressure =
     current.surface_pressure ??
     (currentIndex !== -1 ? hourly.surface_pressure?.[currentIndex] : null);
-  const wind = current.windspeed;
   const uv = daily.uv_index_max?.[0];
 
   // advisory text based on UV
@@ -63,7 +66,7 @@ export default function MetricsColumn({ weather }) {
         </div>
         <div className="metric-value">
           {wind ?? '—'}
-          <span className="metric-unit"> km/h</span>
+          <span className="metric-unit">{unit === 'C' ? 'km/h' : 'mph'}</span>
         </div>
       </div>
 
@@ -74,7 +77,12 @@ export default function MetricsColumn({ weather }) {
         </div>
         <div className="metric-value ">
           {humidity ?? '—'}
-          <span className="metric-unit">%</span>
+          <span className="metric-unit">
+            %{' '}
+            <span style={{ fontSize: 'var(--fs-base)', fontWeight: 'var(--fw-semibold)' }}>
+              humid
+            </span>
+          </span>
         </div>
       </div>
     </aside>

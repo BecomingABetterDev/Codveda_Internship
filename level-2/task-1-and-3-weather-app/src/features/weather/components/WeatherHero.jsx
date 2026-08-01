@@ -1,11 +1,15 @@
 import Icon from '@/shared/components/Icons';
 import React from 'react';
+import { toFahrenheit } from '../utils/convert';
 import './weatherHero.css';
 // import '@/shared/styles/variable.css';
 
-export default function WeatherHero({ location, weather, unit = 'C' }) {
+export default function WeatherHero({ location, weather, unit }) {
   if (!location || !weather) return null;
   const { current, hourly, daily } = weather;
+
+  const temp =
+    unit === 'C' ? Math.round(current.temperature) : Math.round(toFahrenheit(current.temperature));
 
   // Weather code ranges
   const codeMap = [
@@ -34,23 +38,6 @@ export default function WeatherHero({ location, weather, unit = 'C' }) {
   const apparentTemp =
     currentIndex !== -1 ? hourly.apparent_temperature[currentIndex] : current.temperature;
 
-  // Advisory logic
-  // let advisory = '';
-
-  // if (precipProb >= 70) {
-  //   advisory =
-  //     'High probability of precipitation (≥70%): Rain is very likely due to atmospheric moisture saturation and frontal activity. Carry an umbrella and waterproof gear to protect against sustained rainfall.';
-  // } else if (daily.uv_index_max?.[0] >= 8) {
-  //   advisory =
-  //     'Very high UV Index (≥8): Solar ultraviolet radiation is intense, capable of causing rapid skin damage and erythema via high-energy UV-B photons. Apply broad-spectrum SPF 30+ sunscreen, wear UV-blocking sunglasses, and limit direct midday sun exposure.';
-  // } else if (apparentTemp < current.temperature - 3) {
-  //   advisory =
-  //     'Elevated wind chill or humidity effect (Apparent temperature >3°C below actual): Environmental factors like wind speed or low humidity increase convective heat loss from the skin, making it feel significantly colder than the ambient thermometer reading. Dress in insulating, layered clothing.';
-  // } else {
-  //   advisory =
-  //     'Stable meteorological conditions: Atmospheric pressure and thermal gradients remain balanced, indicating low risk for sudden severe weather changes. Standard daily routines can proceed comfortably.';
-  // }
-
   let advisory = '';
 
   if (precipProb >= 70) {
@@ -65,6 +52,8 @@ export default function WeatherHero({ location, weather, unit = 'C' }) {
     advisory = 'Stable weather conditions. No major risks expected — enjoy your day comfortably.';
   }
 
+  const apparentTempValue =
+    unit === 'C' ? Math.round(apparentTemp) : Math.round(toFahrenheit(apparentTemp));
   return (
     <aside className="hero-wrap">
       <section
@@ -85,7 +74,7 @@ export default function WeatherHero({ location, weather, unit = 'C' }) {
         <div className="hero-body">
           <div className="hero-left">
             <div className="temp-row">
-              <span className="temp-value">{Math.round(current.temperature)}</span>
+              <span className="temp-value">{temp}</span>
               <span className="temp-unit">°{unit}</span>
             </div>
 
@@ -96,7 +85,9 @@ export default function WeatherHero({ location, weather, unit = 'C' }) {
 
             <div className="hero-sub">
               <div className="sub-item">
-                <span className="sub-value">{Math.round(apparentTemp)}°</span>
+                <span className="sub-value">
+                  {apparentTempValue}° {unit}
+                </span>
                 <span className="sub-label">Feels like</span>
               </div>
               <div className="sub-item">
