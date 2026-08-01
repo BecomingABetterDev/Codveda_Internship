@@ -49,7 +49,7 @@ export async function getWeather(lat, lon, units = 'metric') {
     const tempUnit = units === 'imperial' ? 'fahrenheit' : 'celsius';
     const windUnit = units === 'imperial' ? 'mph' : 'kmh';
 
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&hourly=temperature_2m,apparent_temperature,relative_humidity_2m,windspeed_10m,precipitation_probability,precipitation,surface_pressure&daily=temperature_2m_max,temperature_2m_min,uv_index_max,sunrise,sunset,precipitation_sum&temperature_unit=${tempUnit}&windspeed_unit=${windUnit}&timezone=auto`;
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&hourly=temperature_2m,apparent_temperature,relative_humidity_2m,windspeed_10m,precipitation_probability,precipitation,surface_pressure&daily=temperature_2m_max,temperature_2m_min,uv_index_max,sunrise,sunset,precipitation_sum,weathercode&temperature_unit=${tempUnit}&windspeed_unit=${windUnit}&timezone=auto`;
 
     const data = await fetchWithTimeout(url);
 
