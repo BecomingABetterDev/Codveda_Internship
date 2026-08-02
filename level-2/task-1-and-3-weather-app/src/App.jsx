@@ -14,6 +14,11 @@ const App = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [unit, setUnit] = useState('C');
+  const [theme, setTheme] = useState('light');
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
 
   useEffect(() => {
     if (!selectedLocation) return;
@@ -27,15 +32,23 @@ const App = () => {
 
   const toggleUnit = (next) => {
     if (typeof next === 'string') {
-      setUnit(next); // from <select>
+      setUnit(next);
     } else {
-      setUnit((u) => (u === 'C' ? 'F' : 'C')); // from button
+      setUnit((u) => (u === 'C' ? 'F' : 'C'));
     }
   };
 
+  const toggleTheme = () => setTheme((t) => (t === 'light' ? 'dark' : 'light'));
+
   return (
     <>
-      <Header onSelect={setSelectedLocation} unit={unit} onToggleUnit={toggleUnit} />
+      <Header
+        onSelect={setSelectedLocation}
+        unit={unit}
+        onToggleUnit={toggleUnit}
+        theme={theme}
+        onThemeToggle={toggleTheme}
+      />
       <div className="app-layout">
         <main className="app-main">
           {loading && <div className="hero-status">Loading weather...</div>}

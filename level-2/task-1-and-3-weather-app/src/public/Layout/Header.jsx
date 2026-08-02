@@ -2,8 +2,7 @@ import SearchBar from '@/features/search/components/SearchBar';
 import Icon from '@/shared/components/Icons';
 import { useState } from 'react';
 
-// Header.jsx
-export default function Header({ onSelect, unit, onToggleUnit, onThemeToggle }) {
+export default function Header({ onSelect, unit, onToggleUnit, onThemeToggle, theme }) {
   const [settingsOpen, setSettingsOpen] = useState(false);
 
   return (
@@ -42,19 +41,45 @@ export default function Header({ onSelect, unit, onToggleUnit, onThemeToggle }) 
       {settingsOpen && (
         <div className="settings-modal">
           <div className="settings-content">
-            <h4>Preferences</h4>
-            <label>
-              Default Unit:
-              <select value={unit} onChange={(e) => onToggleUnit(e.target.value)}>
-                <option value="C">Celsius</option>
-                <option value="F">Fahrenheit</option>
-              </select>
-            </label>
-            <label>
-              Theme:
-              <button onClick={onThemeToggle}>Toggle Light/Dark</button>
-            </label>
-            <button onClick={() => setSettingsOpen(false)}>Close</button>
+            <div className="settings-header">
+              <h4>Preferences</h4>
+              <button
+                className="close-btn"
+                aria-label="Close settings"
+                onClick={() => setSettingsOpen(false)}
+              >
+                <Icon name="X" size={20} />
+              </button>
+            </div>
+
+            <div className="settings-section">
+              <span className="section-label">Default Unit</span>
+              <div className="chip-group">
+                <button
+                  className={`chip ${unit === 'C' ? 'active' : ''}`}
+                  onClick={() => onToggleUnit('C')}
+                >
+                  °C
+                </button>
+                <button
+                  className={`chip ${unit === 'F' ? 'active' : ''}`}
+                  onClick={() => onToggleUnit('F')}
+                >
+                  °F
+                </button>
+              </div>
+            </div>
+
+            <div className="settings-section">
+              <span className="section-label">Theme</span>
+              <button className="theme-toggle" onClick={onThemeToggle} aria-label="Toggle theme">
+                {theme === 'light' ? (
+                  <Icon name="Sun" size={22} strokeWidth={2} />
+                ) : (
+                  <Icon name="Moon" size={22} />
+                )}
+              </button>
+            </div>
           </div>
         </div>
       )}

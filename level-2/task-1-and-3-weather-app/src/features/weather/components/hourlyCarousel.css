@@ -143,7 +143,7 @@
 .meta-value {
     font-size: var(--fs-base);
     font-weight: var(--fw-bold);
-    color: var(--accent-rain);
+    color: var(--color-accent-600);
 }
 
 .sparkline-legend {

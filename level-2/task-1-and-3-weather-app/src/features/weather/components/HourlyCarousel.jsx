@@ -131,7 +131,7 @@ export default function HourlyCarousel({ weather, unit }) {
           <defs>
             <linearGradient id="tempGradient" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%" stopColor="#f97316" />
-              <stop offset="100%" stopColor="#3b82f6" />
+              <stop offset="100%" stopColor="var(--temp-color)" />
             </linearGradient>
             <linearGradient id="precipGradient" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%" stopColor="#06b6d4" />

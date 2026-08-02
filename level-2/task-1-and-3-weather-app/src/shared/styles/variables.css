@@ -73,7 +73,7 @@
     /* muted gray for cloudy */
     --accent-sunset: #7c3aed;
     /* muted indigo for warm times */
-    /* Highlight surface for hero metric */
+    --temp-color: #3b82f6;
     --bg-highlight: #eef6ff;
     /* Motion and timing */
     --motion-fast: 120ms;
@@ -88,4 +88,24 @@
     --focus-ring: 0 0 0 3px rgba(37, 99, 235, 0.12);
     /* Utility */
     --card-padding: var(--space-3);
+}
+
+
+/* Dark theme overrides */
+
+[data-theme='dark'] {
+    --bg-primary: #0f172a;
+    --bg-surface: #1e293b;
+    --bg-glass: rgba(30, 41, 59, 0.7);
+    --text-primary: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --color-border: #334155;
+    --color-accent: #38bdf8;
+    --color-accent-600: #0ea5e9;
+    --color-accent-alpha: rgba(56, 189, 248, 0.12);
+    --temp-color: #27354c;
+    --shadow-sm: 0 4px 10px rgba(0, 0, 0, 0.4);
+    --shadow-card: 0 6px 18px rgba(0, 0, 0, 0.5);
+    --shadow-premium: 0 12px 32px rgba(0, 0, 0, 0.6);
+    --bg-highlight: #1e3a8a;
 }
