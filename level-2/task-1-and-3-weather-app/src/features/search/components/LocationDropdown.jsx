@@ -2,8 +2,8 @@
 import './dropdown.css';
 
 export default function LocationDropdown({ results, loading, error, onSelect }) {
-  if (loading) return <div className="dropdown">Loading...</div>;
-  if (error) return <div className="dropdown error">{error}</div>;
+  if (loading) return <div className="dropdown">Searching...</div>;
+  if (error) return <div className="dropdown dropdown-status">{error}</div>;
   if (!results || results.length === 0) return null;
 
   return (

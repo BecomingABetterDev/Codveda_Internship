@@ -86,10 +86,20 @@ const App = () => {
       />
       <div className="app-layout">
         <main className="app-main">
-          {loading && <div className="hero-status">Loading weather...</div>}
-          {error && <div className="hero-status error">{error}</div>}
+          {loading && (
+            <div className="loading-overlay" aria-busy="true">
+              <div className="spinner"></div>
+              <span className="loading-text">Fetching live weather…</span>
+            </div>
+          )}
+          {error && (
+            <div className="error-banner">
+              <Icon name="AlertTriangle" size={20} />
+              <span>{error}</span>
+            </div>
+          )}
 
-          {!selectedLocation && <EmptyState />}
+          {!selectedLocation && defaultLocation && <EmptyState />}
 
           {selectedLocation && weather && (
             <>
