@@ -2,7 +2,15 @@ import SearchBar from '@/features/search/components/SearchBar';
 import Icon from '@/shared/components/Icons';
 import { useState } from 'react';
 
-export default function Header({ onSelect, unit, onToggleUnit, onThemeToggle, theme }) {
+export default function Header({
+  onSelect,
+  unit,
+  onToggleUnit,
+  onThemeToggle,
+  theme,
+  defaultLocation,
+  onSetLocation,
+}) {
   const [settingsOpen, setSettingsOpen] = useState(false);
 
   return (
@@ -53,21 +61,14 @@ export default function Header({ onSelect, unit, onToggleUnit, onThemeToggle, th
             </div>
 
             <div className="settings-section">
-              <span className="section-label">Default Unit</span>
-              <div className="chip-group">
-                <button
-                  className={`chip ${unit === 'C' ? 'active' : ''}`}
-                  onClick={() => onToggleUnit('C')}
-                >
-                  °C
-                </button>
-                <button
-                  className={`chip ${unit === 'F' ? 'active' : ''}`}
-                  onClick={() => onToggleUnit('F')}
-                >
-                  °F
-                </button>
-              </div>
+              <span className="section-label">Default Location</span>
+              <input
+                type="text"
+                className="location-input"
+                value={defaultLocation}
+                onChange={(e) => onSetLocation(e.target.value)}
+                placeholder="Enter city name"
+              />
             </div>
 
             <div className="settings-section">

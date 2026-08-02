@@ -11,14 +11,47 @@ import MetricsColumn from './features/weather/components/MetricsColumn';
 const App = () => {
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [weather, setWeather] = useState(null);
+  const [defaultLocation, setDefaultLocation] = useState(
+    () => localStorage.getItem('location') || ''
+  );
+  const [unit, setUnit] = useState('C');
+  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [unit, setUnit] = useState('C');
-  const [theme, setTheme] = useState('light');
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
   }, [theme]);
+
+  useEffect(() => {
+    if (defaultLocation) {
+      localStorage.setItem('location', defaultLocation);
+    }
+  }, [defaultLocation]);
+
+  useEffect(() => {
+    if (defaultLocation && !selectedLocation) {
+      // Call your geocoding API here to resolve lat/lon
+      fetch(
+        `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(
+          defaultLocation
+        )}&count=1&language=en&format=json`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.results && data.results.length > 0) {
+            const loc = {
+              name: data.results[0].name,
+              lat: data.results[0].latitude,
+              lon: data.results[0].longitude,
+            };
+            setSelectedLocation(loc);
+          }
+        })
+        .catch((err) => console.error('Failed to resolve default location', err));
+    }
+  }, []);
 
   useEffect(() => {
     if (!selectedLocation) return;
@@ -47,7 +80,9 @@ const App = () => {
         unit={unit}
         onToggleUnit={toggleUnit}
         theme={theme}
-        onThemeToggle={toggleTheme}
+        onThemeToggle={() => setTheme((t) => (t === 'light' ? 'dark' : 'light'))}
+        defaultLocation={defaultLocation}
+        onSetLocation={setDefaultLocation}
       />
       <div className="app-layout">
         <main className="app-main">
