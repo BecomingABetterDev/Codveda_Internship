@@ -14,7 +14,7 @@ const App = () => {
   const [defaultLocation, setDefaultLocation] = useState(
     () => localStorage.getItem('location') || ''
   );
-  const [unit, setUnit] = useState('C');
+  const [unit, setUnit] = useState(() => localStorage.getItem('unit') || 'C');
   const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -29,6 +29,9 @@ const App = () => {
       localStorage.setItem('location', defaultLocation);
     }
   }, [defaultLocation]);
+  useEffect(() => {
+    localStorage.setItem('unit', unit);
+  }, [unit]);
 
   useEffect(() => {
     if (defaultLocation && !selectedLocation) {

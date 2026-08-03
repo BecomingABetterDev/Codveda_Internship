@@ -56,13 +56,7 @@ export default function WeatherHero({ location, weather, unit }) {
     unit === 'C' ? Math.round(apparentTemp) : Math.round(toFahrenheit(apparentTemp));
   return (
     <aside className="hero-wrap">
-      <section
-        className="weather-hero card-hero"
-        style={{
-          background: `linear-gradient(180deg, ${meta.accent}20, var(--bg-surface))`,
-          borderColor: meta.accent,
-        }}
-      >
+      <section className="weather-hero card-hero">
         <div className="hero-top">
           <div className="hero-brand">
             <h3 className="hero-location">{location.name}</h3>
