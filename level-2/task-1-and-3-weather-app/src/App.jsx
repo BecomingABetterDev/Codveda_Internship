@@ -7,7 +7,7 @@ import DailyForecast from './features/weather/components/DailyForecast';
 import { getWeather } from './shared/services/api';
 import EmptyState from './public/Layout/EmptyState';
 import MetricsColumn from './features/weather/components/MetricsColumn';
-
+import Icon from './shared/components/Icons';
 const App = () => {
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [weather, setWeather] = useState(null);
