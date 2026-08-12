@@ -23,6 +23,7 @@ lerna-debug.log*
 # Testing
 /coverage
 /.nyc_output
+*.http
 
 # OS Files
 .DS_Store
