@@ -43,17 +43,15 @@ const authLimiter = rateLimit({
 });
 
 // Route Mounting
-app.use("/api/auth", authLimiter, authRoutes);
-app.use("/api/prompts", promptRoutes);
+app.use("/api/v1/auth", authLimiter, authRoutes);
+app.use("/api/v1/prompts", promptRoutes);
 
-app.get("/api/health", (req, res) => {
-    res
-        .status(200)
-        .json({
-            success: true,
-            status: "operational",
-            timestamp: new Date().toISOString(),
-        });
+app.get("/api/v1/health", (req, res) => {
+    res.status(200).json({
+        success: true,
+        status: "operational",
+        timestamp: new Date().toISOString(),
+    });
 });
 
 // Error Handling Stack
