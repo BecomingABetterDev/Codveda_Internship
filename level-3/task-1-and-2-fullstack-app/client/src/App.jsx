@@ -1,17 +1,48 @@
-﻿import React from "react";
+﻿import React, { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import AppShell from "./components/layout/AppShell";
+import Dashboard from "./pages/Dashboard";
+import PromptVault from "./pages/PromptVault";
+import AddPrompt from "./pages/AddPrompt";
+import SettingsView from "./components/SettingsView";
+import PromptBuilder from "./pages/PromptBuilder";
+
 export default function App() {
+  const [searchQuery, setSearchQuery] = useState("");
+
   return (
-    <div
-      style={{
-        padding: "2rem",
-        fontFamily: "sans-serif",
-        backgroundColor: "#090d16",
-        color: "#fff",
-        minHeight: "100vh",
-      }}
-    >
-      <h1>⚡ DevVolt Workspace Initialized</h1>
-      <p>System client engine operational on Vite 2.9 + React 18.</p>
-    </div>
+    <BrowserRouter>
+      <AppShell
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+      >
+        <Routes>
+          <Route
+            path="/"
+            element={<Dashboard />}
+          />
+          <Route
+            path="/dashboard"
+            element={<Dashboard />}
+          />
+          <Route
+            path="/prompts"
+            element={<PromptVault searchQuery={searchQuery} />}
+          />
+          <Route
+            path="/prompts/new"
+            element={<AddPrompt />}
+          />
+          <Route
+            path="/settings"
+            element={<SettingsView />}
+          />
+          <Route
+            path="/builder"
+            element={<PromptBuilder />}
+          />
+        </Routes>
+      </AppShell>
+    </BrowserRouter>
   );
 }
