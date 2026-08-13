@@ -8,12 +8,12 @@ import PromptBuilder from "./pages/PromptBuilder";
 import SettingsView from "./components/SettingsView";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
+import PromptModal from "./components/prompts/PromptModal";
+import AddPrompt from "./pages/AddPrompt";
 
-// Guard component for protected layout
 function ProtectedLayout({ searchQuery, setSearchQuery, children }) {
   const { user, loading, logout } = useAuth();
 
-  // Show a clean loader while checking token session on load
   if (loading) {
     return (
       <div className="min-h-screen bg-canvas flex items-center justify-center text-slate-400">
@@ -75,6 +75,11 @@ export default function App() {
                 path="/prompts"
                 element={<PromptVault searchQuery={searchQuery} />}
               />
+              <Route
+                path="/prompts/new"
+                element={<AddPrompt />}
+              />
+
               <Route
                 path="/builder"
                 element={<PromptBuilder />}
