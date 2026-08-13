@@ -38,7 +38,7 @@ export default function Login() {
 
       <div className="w-full max-w-md bg-surface border border-surface-muted rounded-2xl shadow-glass p-8 relative z-10 backdrop-filter backdrop-blur-xl">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-white mb-2 tracking-tight">
+          <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2 tracking-tight">
             Welcome Back
           </h1>
           <p className="text-gray-400 text-sm">
@@ -51,7 +51,7 @@ export default function Login() {
           className="space-y-6"
         >
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-1">
+            <label className="block text-sm font-medium text-gray-500 mb-1">
               Email Address
             </label>
             <div className="relative flex items-center text-gray-400 focus-within:text-brand transition-colors">
@@ -60,7 +60,7 @@ export default function Login() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-canvas border border-surface-muted rounded-lg py-2.5 pl-10 pr-4 text-white placeholder-gray-500 focus:ring-1 focus:ring-brand focus:border-brand transition-shadow"
+                className="w-full bg-canvas border border-surface-muted rounded-lg py-2.5 pl-10 pr-4 text-slate-900 dark:text-white placeholder-gray-500 focus:ring-1 focus:ring-brand focus:border-brand transition-shadow"
                 placeholder="developer@example.com"
                 disabled={isSubmitting}
               />
@@ -68,7 +68,7 @@ export default function Login() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-1">
+            <label className="block text-sm font-medium text-gray-500 mb-1">
               Password
             </label>
             <div className="relative flex items-center text-gray-400 focus-within:text-brand transition-colors">
@@ -77,14 +77,14 @@ export default function Login() {
                 type={showPassword ? "text" : "password"}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-canvas border border-surface-muted rounded-lg py-2.5 pl-10 pr-10 text-white placeholder-gray-500 focus:ring-1 focus:ring-brand focus:border-brand transition-shadow"
+                className="w-full bg-canvas border border-surface-muted rounded-lg py-2.5 pl-10 pr-10 text-slate-900 dark:text-white placeholder-gray-500 focus:ring-1 focus:ring-brand focus:border-brand transition-shadow"
                 placeholder="••••••••"
                 disabled={isSubmitting}
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 text-gray-400 hover:text-white transition-colors focus:outline-none"
+                className="absolute right-3 text-gray-400 hover:text-slate-500 transition-colors focus:outline-none"
               >
                 {showPassword ? (
                   <EyeOff className="w-5 h-5" />

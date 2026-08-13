@@ -102,7 +102,7 @@ export default function PromptVault({ searchQuery, setSearchQuery }) {
       {/* Header & Primary Actions */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-white tracking-tight">
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">
             Prompt Vault
           </h1>
           <p className="text-gray-400 text-sm">

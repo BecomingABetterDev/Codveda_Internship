@@ -58,6 +58,13 @@ export const AuthProvider = ({ children }) => {
     return userData;
   };
 
+  // Synchronizes profile state across React and localStorage
+  const updateUser = (updatedFields) => {
+    const newUserData = { ...user, ...updatedFields };
+    setUser(newUserData);
+    localStorage.setItem("devvolt_user", JSON.stringify(newUserData));
+  };
+
   const logout = () => {
     localStorage.removeItem("devvolt_token");
     localStorage.removeItem("devvolt_user");
@@ -65,8 +72,9 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout }}>
-      {" "}
+    <AuthContext.Provider
+      value={{ user, loading, login, register, logout, updateUser }}
+    >
       {children}
     </AuthContext.Provider>
   );

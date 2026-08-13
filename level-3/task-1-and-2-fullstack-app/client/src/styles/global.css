@@ -1,81 +1,117 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 @layer base {
-  /* Prevent layout shift when scrollbars appear/disappear */
-  html,
-  body,
-  #root {
-    height: 100%;
-    scrollbar-gutter: stable;
-  }
-
-  /* Smooth Theme Transitions */
-  body {
-    transition: background-color 0.25s ease, color 0.25s ease;
-  }
+     :root {
+        /* Tech Orange Light Theme (Crisp White Surface & Slate Text) */
+        --color-canvas: #F1F5F9;
+        /* Cool Slate Background */
+        --color-surface: #FFFFFF;
+        /* Pure White Card Containers */
+        --color-surface-muted: #CBD5E1;
+        /* High-Contrast Light Border */
+        --color-surface-hover: #E2E8F0;
+        /* Soft Hover Fill */
+        --color-brand: #FF5722;
+        /* Tech Orange Accent */
+        --color-brand-hover: #EA580C;
+        /* Deep Orange Hover */
+        --color-text-main: #0F172A;
+        /* Dark Slate Primary Text */
+        --color-text-sub: #475569;
+        /* Medium Slate Secondary Text */
+        --color-text-muted: #94A3B8;
+        /* Muted Grey Text */
+    }
+    .dark {
+        /* Midnight Vault Dark Theme (Deep Navy & High-Contrast Borders) */
+        --color-canvas: #090D16;
+        /* Deep Midnight Canvas */
+        --color-surface: #111827;
+        /* Dark Card Container */
+        --color-surface-muted: #273549;
+        /* Crisp Visible Border (No Blending!) */
+        --color-surface-hover: #1F2937;
+        /* Subtle Hover Surface */
+        --color-brand: #6366F1;
+        /* Electric Indigo Accent */
+        --color-brand-hover: #4F46E5;
+        /* Vibrant Indigo Hover */
+        --color-text-main: #F8FAFC;
+        /* Pure White Primary Text */
+        --color-text-sub: #94A3B8;
+        /* Soft Light-Grey Secondary Text */
+        --color-text-muted: #64748B;
+        /* Muted Subtext */
+    }
+    body {
+        background-color: var(--color-canvas);
+        color: var(--color-text-main);
+        transition: background-color 0.25s ease, color 0.25s ease;
+    }
+    html,
+    body,
+    #root {
+        height: 100%;
+        scrollbar-gutter: stable;
+    }
 }
 
+
 /* Custom Themed Scrollbars */
+
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+    width: 6px;
+    height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+    background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(156, 163, 175, 0.25);
-  border-radius: 9999px;
+    background: rgba(100, 116, 139, 0.3);
+    border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(156, 163, 175, 0.45);
+    background: rgba(100, 116, 139, 0.5);
 }
 
-/* Dark mode scrollbar contrast */
-.dark ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
-}
-
-.dark ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
 
 /* Hide scrollbar utility for clean tag carousels */
+
 .no-scrollbar::-webkit-scrollbar {
-  display: none;
+    display: none;
 }
+
 .no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
 @keyframes wave {
-  0% {
-    transform: rotate(0deg);
-  }
-  20% {
-    transform: rotate(14deg);
-  }
-  40% {
-    transform: rotate(-8deg);
-  }
-  60% {
-    transform: rotate(14deg);
-  }
-  80% {
-    transform: rotate(-4deg);
-  }
-  100% {
-    transform: rotate(0deg);
-  }
+    0% {
+        transform: rotate(0deg);
+    }
+    20% {
+        transform: rotate(14deg);
+    }
+    40% {
+        transform: rotate(-8deg);
+    }
+    60% {
+        transform: rotate(14deg);
+    }
+    80% {
+        transform: rotate(-4deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
 }
 
 .animate-wave {
-  animation: wave 1.8s infinite;
-  transform-origin: 70% 70%;
+    animation: wave 1.8s infinite;
+    transform-origin: 70% 70%;
 }

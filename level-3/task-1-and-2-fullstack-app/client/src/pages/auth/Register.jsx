@@ -73,7 +73,7 @@ export default function Register() {
 
       <div className="w-full max-w-md bg-surface border border-surface-muted rounded-2xl shadow-glass p-8 relative z-10 backdrop-filter backdrop-blur-xl">
         <div className="text-center mb-6">
-          <h1 className="text-3xl font-bold text-white mb-2 tracking-tight">
+          <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2 tracking-tight">
             Create Account
           </h1>
           <p className="text-gray-400 text-sm">
@@ -87,7 +87,7 @@ export default function Register() {
         >
           {/* Username Field */}
           <div>
-            <label className="block text-xs font-medium text-gray-300 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-medium text-slate-700 uppercase tracking-wider mb-1">
               Username
             </label>
             <div className="relative flex items-center text-gray-400 focus-within:text-brand transition-colors">
@@ -96,7 +96,7 @@ export default function Register() {
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="w-full bg-canvas border border-surface-muted rounded-lg py-2.5 pl-10 pr-4 text-white text-sm placeholder-gray-500 focus:ring-1 focus:ring-brand focus:border-brand transition-all"
+                className="w-full bg-canvas border border-surface-muted rounded-lg py-2.5 pl-10 pr-4 text-slate-900 dark:text-white text-sm placeholder-gray-500 focus:ring-1 focus:ring-brand focus:border-brand transition-all"
                 placeholder="johndoe"
                 disabled={isSubmitting}
               />
@@ -105,7 +105,7 @@ export default function Register() {
 
           {/* Email Field */}
           <div>
-            <label className="block text-xs font-medium text-gray-300 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-medium text-slate-700 uppercase tracking-wider mb-1">
               Email Address
             </label>
             <div className="relative flex items-center text-gray-400 focus-within:text-brand transition-colors">
@@ -114,7 +114,7 @@ export default function Register() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-canvas border border-surface-muted rounded-lg py-2.5 pl-10 pr-4 text-white text-sm placeholder-gray-500 focus:ring-1 focus:ring-brand focus:border-brand transition-all"
+                className="w-full bg-canvas border border-surface-muted rounded-lg py-2.5 pl-10 pr-4 text-slate-900 dark:text-white text-sm placeholder-gray-500 focus:ring-1 focus:ring-brand focus:border-brand transition-all"
                 placeholder="developer@example.com"
                 disabled={isSubmitting}
               />
@@ -123,7 +123,7 @@ export default function Register() {
 
           {/* Password Field */}
           <div>
-            <label className="block text-xs font-medium text-gray-300 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-medium text-slate-700 uppercase tracking-wider mb-1">
               Password
             </label>
             <div className="relative flex items-center text-gray-400 focus-within:text-brand transition-colors">
@@ -132,14 +132,14 @@ export default function Register() {
                 type={showPassword ? "text" : "password"}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-canvas border border-surface-muted rounded-lg py-2.5 pl-10 pr-10 text-white text-sm placeholder-gray-500 focus:ring-1 focus:ring-brand focus:border-brand transition-all"
+                className="w-full bg-canvas border border-surface-muted rounded-lg py-2.5 pl-10 pr-10 text-slate-900 dark:text-white text-sm placeholder-gray-500 focus:ring-1 focus:ring-brand focus:border-brand transition-all"
                 placeholder="••••••••"
                 disabled={isSubmitting}
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 text-gray-400 hover:text-white transition-colors focus:outline-none"
+                className="absolute right-3 text-gray-400 hover:text-slate-700 transition-colors focus:outline-none"
               >
                 {showPassword ? (
                   <EyeOff className="w-5 h-5" />
@@ -180,7 +180,7 @@ export default function Register() {
 
           {/* Confirm Password Field */}
           <div>
-            <label className="block text-xs font-medium text-gray-300 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-medium text-slate-700 uppercase tracking-wider mb-1">
               Confirm Password
             </label>
             <div className="relative flex items-center text-gray-400 focus-within:text-brand transition-colors">
@@ -189,7 +189,7 @@ export default function Register() {
                 type={showPassword ? "text" : "password"}
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                className="w-full bg-canvas border border-surface-muted rounded-lg py-2.5 pl-10 pr-4 text-white text-sm placeholder-gray-500 focus:ring-1 focus:ring-brand focus:border-brand transition-all"
+                className="w-full bg-canvas border border-surface-muted rounded-lg py-2.5 pl-10 pr-4 text-slate-900 dark:text-white text-sm placeholder-gray-500 focus:ring-1 focus:ring-brand focus:border-brand transition-all"
                 placeholder="••••••••"
                 disabled={isSubmitting}
               />
@@ -209,12 +209,12 @@ export default function Register() {
           <button
             type="submit"
             disabled={isSubmitting || !isPasswordStrong || !passwordsMatch}
-            className="w-full mt-2 bg-brand hover:bg-brand-hover text-white font-medium py-2.5 rounded-lg flex items-center justify-center transition-all shadow-glow disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full mt-2 bg-brand hover:bg-brand-hover text-slate-900 dark:text-white font-medium py-2.5 rounded-lg flex items-center justify-center transition-all shadow-glow disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isSubmitting ? (
               <span className="flex items-center text-sm">
                 <svg
-                  className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
+                  className="animate-spin -ml-1 mr-2 h-4 w-4 text-slate-900 dark:text-white"
                   fill="none"
                   viewBox="0 0 24 24"
                 >

@@ -65,8 +65,9 @@ export const loginUser = asyncHandler(async(req, res) => {
 
     email = String(email).trim().toLowerCase();
 
-    const user = await User.findOne({ email });
-
+    const user = await User.findOne({
+        email: new RegExp("^" + req.body.email + "$", "i"),
+    });
     if (user && (await user.matchPassword(password))) {
         res.status(200).json({
             success: true,

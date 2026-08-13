@@ -64,7 +64,7 @@ export default function PromptCard({
               <Star
                 className={`w-4 h-4 transition-all duration-200 ${
                   isFav
-                    ? "text-amber-400 fill-amber-400 scale-110"
+                    ? "text-amber-400 fill-current scale-110"
                     : "text-gray-400 fill-none hover:text-amber-400"
                 }`}
               />
@@ -76,7 +76,7 @@ export default function PromptCard({
                 e.stopPropagation();
                 onEdit && onEdit(prompt, e);
               }}
-              className="p-1.5 rounded-lg text-gray-400 hover:text-white hover:bg-surface-hover transition-colors"
+              className="p-1.5 rounded-lg text-gray-400 hover:text-green-400 hover:bg-surface-hover transition-colors"
               title="Edit Prompt"
             >
               <Edit3 className="w-4 h-4" />
@@ -97,7 +97,7 @@ export default function PromptCard({
         </div>
 
         {/* Title & Description */}
-        <h3 className="text-base font-bold text-white group-hover:text-brand transition-colors line-clamp-1 mb-1.5">
+        <h3 className="text-base font-bold text-slate-900 dark:text-white group-hover:text-brand transition-colors line-clamp-1 mb-1.5">
           {prompt.title}
         </h3>
         <p className="text-xs text-gray-400 line-clamp-2 mb-4 leading-relaxed">
@@ -130,7 +130,7 @@ export default function PromptCard({
           className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all shrink-0 ${
             copied
               ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30"
-              : "bg-surface-hover text-gray-200 hover:text-white hover:bg-brand/20 hover:border-brand/30 border border-transparent"
+              : "bg-surface-hover text-slate-900 dark:text-white hover:bg-brand hover:border-brand border border-transparent"
           }`}
         >
           {copied ? (

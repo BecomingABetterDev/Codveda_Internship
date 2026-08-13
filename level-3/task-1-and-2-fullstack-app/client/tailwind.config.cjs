@@ -8,17 +8,17 @@ module.exports = {
             colors: {
                 amber: colors.amber,
                 emerald: colors.emerald,
-                canvas: "#030712", // Ultra-deep slate for the background
-                surface: {
-                    DEFAULT: "#090D16", // Card backgrounds
-                    hover: "#1f2937",
-                    muted: "#374151",
-                    glass: "rgba(17, 24, 39, 0.7)",
-                },
+                slate: colors.blueGray,
                 brand: {
-                    DEFAULT: "#6366f1", // Indigo-500
-                    hover: "#4f46e5", // Indigo-600
-                    glow: "rgba(99, 102, 241, 0.15)",
+                    DEFAULT: "var(--color-brand)",
+                    hover: "var(--color-brand-hover)",
+                },
+                canvas: "var(--color-canvas)",
+                surface: {
+                    DEFAULT: "var(--color-surface)",
+                    muted: "var(--color-surface-muted)",
+                    hover: "var(--color-surface-hover)",
+                    glass: "rgba(17, 24, 39, 0.7)",
                 },
             },
             boxShadow: {

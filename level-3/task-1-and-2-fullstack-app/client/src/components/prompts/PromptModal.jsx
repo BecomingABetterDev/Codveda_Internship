@@ -55,11 +55,13 @@ export default function PromptModal({ prompt, onClose }) {
             <span className="text-xs font-semibold px-2.5 py-0.5 rounded-md bg-brand/20 text-brand border border-brand/30">
               {category}
             </span>
-            <h2 className="text-lg font-bold text-white mt-1">{title}</h2>
+            <h2 className="text-lg font-bold text-slate-900 dark:text-white mt-1">
+              {title}
+            </h2>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-gray-400 hover:text-white hover:bg-surface-hover transition-colors"
+            className="p-1.5 rounded-lg text-gray-400 hover:text-slate-500 hover:bg-surface-hover transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -87,7 +89,7 @@ export default function PromptModal({ prompt, onClose }) {
                         handleInputChange(variable, e.target.value)
                       }
                       placeholder={`Enter ${variable}...`}
-                      className="w-full bg-canvas border border-surface-muted rounded-xl px-3 py-2 text-white text-xs focus:ring-1 focus:ring-brand focus:border-brand"
+                      className="w-full bg-canvas border border-surface-muted rounded-xl px-3 py-2 text-slate-900 dark:text-white text-xs focus:ring-1 focus:ring-brand focus:border-brand"
                     />
                   </div>
                 ))}
@@ -103,14 +105,14 @@ export default function PromptModal({ prompt, onClose }) {
           {/* Live Preview */}
           <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <label className="text-xs font-semibold text-gray-300 uppercase tracking-wider">
+              <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
                 Live Output Preview
               </label>
-              <span className="text-xs text-gray-400">
+              <span className="text-xs text-gray-600">
                 {interpolatedContent.length} chars
               </span>
             </div>
-            <div className="p-4 bg-canvas border border-surface-muted rounded-xl font-mono text-xs text-gray-200 whitespace-pre-wrap leading-relaxed max-h-60 overflow-y-auto">
+            <div className="p-4 bg-canvas border border-surface-muted rounded-xl font-mono text-xs text-gray-500 whitespace-pre-wrap leading-relaxed max-h-60 overflow-y-auto">
               {interpolatedContent}
             </div>
           </div>
@@ -120,13 +122,13 @@ export default function PromptModal({ prompt, onClose }) {
         <div className="px-6 py-4 border-t border-surface-muted flex items-center justify-end space-x-3 bg-surface">
           <button
             onClick={onClose}
-            className="px-4 py-2 rounded-xl text-xs font-medium text-gray-400 hover:text-white transition-colors"
+            className="px-4 py-2 rounded-xl text-xs font-medium text-gray-400 hover:text-slate-500 transition-colors"
           >
             Cancel
           </button>
           <button
             onClick={handleCopy}
-            className="px-5 py-2.5 rounded-xl bg-brand hover:bg-brand-hover text-white text-xs font-semibold flex items-center space-x-2 shadow-glow transition-all"
+            className="px-5 py-2.5 rounded-xl bg-brand hover:bg-brand-hover text-slate-900 dark:text-white text-xs font-semibold flex items-center space-x-2 shadow-glow transition-all"
           >
             {copied ? (
               <Check className="w-4 h-4 text-emerald-400" />

@@ -1,171 +1,162 @@
-import React, { useState } from "react";
-import {
-  Sliders,
-  Key,
-  Database,
-  RefreshCw,
-  Check,
-  Sparkles,
-} from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { Sun, Moon, Sparkles, Key, ShieldCheck, Palette } from "lucide-react";
+import { toast } from "react-hot-toast";
 
 export default function SettingsView() {
-  const [apiKey, setApiKey] = useState("sk-devvolt-local-mock-key");
-  const [autoCopy, setAutoCopy] = useState(true);
-  const [theme, setTheme] = useState("dark");
-  const [saved, setSaved] = useState(false);
+  // Inside SettingsView.jsx
+  const [isDark, setIsDark] = useState(() => {
+    const savedTheme = localStorage.getItem("theme");
+    return savedTheme ? savedTheme === "dark" : true;
+  });
 
-  const handleSave = (e) => {
+  const toggleTheme = (darkMode) => {
+    setIsDark(darkMode);
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+    toast.success(`Switched to ${darkMode ? "Dark" : "Light"} theme`);
+  };
+
+  const [apiKey, setApiKey] = useState(
+    () => localStorage.getItem("openAiApiKey") || ""
+  );
+
+  useEffect(() => {
+    if (isDark) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [isDark]);
+
+  const saveApiKey = (e) => {
     e.preventDefault();
-    setSaved(true);
-    setTimeout(() => setSaved(false), 2500);
+    localStorage.setItem("openAiApiKey", apiKey.trim());
+    toast.success("API key stored locally in browser storage!");
   };
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6 animate-fadeIn pb-12">
-      {/* Page Title */}
-      <div>
-        <h1 className="text-2xl font-bold text-white mb-1">
-          Preferences & Settings
+    <div className="max-w-3xl mx-auto space-y-6">
+      {/* Header */}
+      <div className="bg-surface border border-surface-muted p-6 rounded-2xl shadow-sm">
+        <h1 className="text-2xl font-bold text-slate-900 dark:text-white tracking-tight flex items-center gap-2.5">
+          <Palette className="w-6 h-6 text-brand" />
+          <span>Workspace Preferences</span>
         </h1>
-        <p className="text-sm text-gray-400">
-          Manage your PromptVolt workspace, local keys, and editor default
-          settings.
+        <p className="text-xs text-slate-500 dark:text-gray-400 mt-1">
+          Customize your interface theme and local integration keys.
         </p>
       </div>
 
-      <form
-        onSubmit={handleSave}
-        className="space-y-6"
-      >
-        {/* Workspace Configuration */}
-        <div className="bg-surface border border-surface-muted rounded-2xl p-6 space-y-6">
-          <div className="flex items-center space-x-3 pb-4 border-b border-surface-muted">
-            <div className="p-2 bg-brand/10 text-brand rounded-xl">
-              <Sliders className="w-5 h-5" />
-            </div>
-            <div>
-              <h2 className="text-base font-bold text-white">
-                General Preferences
-              </h2>
-              <p className="text-xs text-gray-400">
-                Control copying and UI behavior
-              </p>
-            </div>
+      {/* Theme Card */}
+      <div className="bg-surface border border-surface-muted rounded-2xl p-6 shadow-sm space-y-4">
+        <div className="flex items-center space-x-3">
+          <div className="p-2 rounded-xl bg-brand/10 text-brand border border-brand/20">
+            <Sparkles className="w-5 h-5" />
           </div>
-
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-sm font-medium text-white">
-                  Auto-Copy on Selection
-                </p>
-                <p className="text-xs text-gray-400">
-                  Automatically copy prompt code to clipboard when opening
-                  detail modal.
-                </p>
-              </div>
-              <button
-                type="button"
-                onClick={() => setAutoCopy(!autoCopy)}
-                className={`w-12 h-6 rounded-full transition-colors relative ${
-                  autoCopy ? "bg-brand" : "bg-surface-muted"
-                }`}
-              >
-                <span
-                  className={`absolute top-1 left-1 bg-white w-4 h-4 rounded-full transition-transform ${
-                    autoCopy ? "translate-x-6" : "translate-x-0"
-                  }`}
-                />
-              </button>
-            </div>
-
-            <div className="pt-4 border-t border-surface-muted/60">
-              <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
-                Interface Color Mode
-              </label>
-              <div className="grid grid-cols-2 gap-3 max-w-xs">
-                <button
-                  type="button"
-                  onClick={() => setTheme("dark")}
-                  className={`px-4 py-2.5 rounded-xl text-xs font-semibold border text-center transition-all ${
-                    theme === "dark"
-                      ? "bg-brand/20 border-brand text-white shadow-glow"
-                      : "bg-canvas border-surface-muted text-gray-400 hover:text-white"
-                  }`}
-                >
-                  Dark Glow (Default)
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setTheme("midnight")}
-                  className={`px-4 py-2.5 rounded-xl text-xs font-semibold border text-center transition-all ${
-                    theme === "midnight"
-                      ? "bg-brand/20 border-brand text-white shadow-glow"
-                      : "bg-canvas border-surface-muted text-gray-400 hover:text-white"
-                  }`}
-                >
-                  Midnight Blue
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* API Integration Settings (Builder Mock) */}
-        <div className="bg-surface border border-surface-muted rounded-2xl p-6 space-y-6">
-          <div className="flex items-center space-x-3 pb-4 border-b border-surface-muted">
-            <div className="p-2 bg-brand/10 text-brand rounded-xl">
-              <Key className="w-5 h-5" />
-            </div>
-            <div>
-              <h2 className="text-base font-bold text-white">
-                AI Builder Local API Keys
-              </h2>
-              <p className="text-xs text-gray-400">
-                Optional credentials for future prompt generation extensions.
-              </p>
-            </div>
-          </div>
-
           <div>
-            <label className="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
-              Local OpenAI / Custom Endpoint Key
-            </label>
-            <div className="relative max-w-md">
-              <input
-                type="password"
-                value={apiKey}
-                onChange={(e) => setApiKey(e.target.value)}
-                className="w-full bg-canvas border border-surface-muted rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-brand font-mono"
-              />
-            </div>
-            <p className="text-[11px] text-gray-500 mt-1.5 flex items-center space-x-1">
-              <Sparkles className="w-3 h-3 text-brand" />
-              <span>Keys are strictly saved in your local browser state.</span>
+            <h3 className="text-sm font-bold text-slate-900 dark:text-white">
+              Appearance Theme
+            </h3>
+            <p className="text-xs text-slate-500 dark:text-gray-400">
+              Select your color preference (Midnight Vault Dark is default).
             </p>
           </div>
         </div>
 
-        {/* Action Save Button */}
-        <div className="flex items-center justify-end">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+          {/* Dark Theme Option */}
           <button
-            type="submit"
-            className="flex items-center space-x-2 px-6 py-2.5 rounded-xl text-sm font-medium bg-brand hover:bg-brand-hover text-white shadow-glow transition-all"
+            type="button"
+            onClick={() => toggleTheme(true)}
+            className={`p-4 rounded-2xl border flex items-center justify-between transition-all ${
+              isDark
+                ? "bg-brand/10 border-brand text-slate-900 dark:text-white shadow-sm"
+                : "bg-canvas border-surface-muted text-slate-500 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white"
+            }`}
           >
-            {saved ? (
-              <>
-                <Check className="w-4 h-4 text-emerald-300" />
-                <span>Settings Saved!</span>
-              </>
-            ) : (
-              <>
-                <RefreshCw className="w-4 h-4" />
-                <span>Save Workspace Preferences</span>
-              </>
-            )}
+            <div className="flex items-center space-x-3">
+              <Moon className="w-5 h-5 text-indigo-500" />
+              <div className="text-left">
+                <p className="text-xs font-bold text-slate-900 dark:text-white">
+                  Midnight Vault (Dark)
+                </p>
+                <p className="text-[11px] text-slate-500 dark:text-gray-400">
+                  Low-eyestrain dark mode
+                </p>
+              </div>
+            </div>
+            {isDark && <span className="w-2.5 h-2.5 rounded-full bg-brand" />}
+          </button>
+
+          {/* Light Theme Option */}
+          <button
+            type="button"
+            onClick={() => toggleTheme(false)}
+            className={`p-4 rounded-2xl border flex items-center justify-between transition-all ${
+              !isDark
+                ? "bg-brand/10 border-brand text-slate-900 dark:text-white shadow-sm"
+                : "bg-canvas border-surface-muted text-slate-500 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white"
+            }`}
+          >
+            <div className="flex items-center space-x-3">
+              <Sun className="w-5 h-5 text-amber-500" />
+              <div className="text-left">
+                <p className="text-xs font-bold text-slate-900 dark:text-white">
+                  Tech Orange (Light)
+                </p>
+                <p className="text-[11px] text-slate-500 dark:text-gray-400">
+                  High-contrast slate & orange
+                </p>
+              </div>
+            </div>
+            {!isDark && <span className="w-2.5 h-2.5 rounded-full bg-brand" />}
           </button>
         </div>
-      </form>
+      </div>
+
+      {/* API Key Storage */}
+      <div className="bg-surface border border-surface-muted rounded-2xl p-6 shadow-sm space-y-4">
+        <div className="flex items-center space-x-3">
+          <div className="p-2 rounded-xl bg-purple-500/10 text-purple-500 border border-purple-500/20">
+            <Key className="w-5 h-5" />
+          </div>
+          <div>
+            <h3 className="text-sm font-bold text-slate-900 dark:text-white">
+              AI Studio Integration Key
+            </h3>
+            <p className="text-xs text-slate-500 dark:text-gray-400">
+              Optional API Key stored strictly in your local browser storage.
+            </p>
+          </div>
+        </div>
+
+        <form
+          onSubmit={saveApiKey}
+          className="space-y-3 pt-2"
+        >
+          <input
+            type="password"
+            value={apiKey}
+            onChange={(e) => setApiKey(e.target.value)}
+            placeholder="sk-proj-..."
+            className="w-full bg-canvas border border-surface-muted rounded-xl px-4 py-2.5 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-brand font-mono"
+          />
+          <button
+            type="submit"
+            className="bg-brand hover:bg-brand-hover text-white text-xs font-semibold px-4 py-2.5 rounded-xl transition-all shadow-sm flex items-center space-x-2"
+          >
+            <ShieldCheck className="w-4 h-4" />
+            <span>Save API Key</span>
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
