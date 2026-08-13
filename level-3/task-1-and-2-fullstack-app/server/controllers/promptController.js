@@ -1,41 +1,62 @@
+import mongoose from "mongoose";
 import Prompt from "../models/Prompt.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 
-// Parse and deduplicate {{variable}} placeholders safely
-const extractVariables = (text) => {
-    if (typeof text !== "string") return [];
-    const matches = text.match(/\{\{([^}]+)\}\}/g);
-    if (!matches) return [];
-
-    // Clean, trim, and cap maximum placeholder count to prevent payload bloating
-    const vars = matches
-        .map((m) => m.replace(/[\{\}]/g, "").trim())
-        .filter((v) => v.length > 0 && v.length <= 50);
-
-    return [...new Set(vars)].slice(0, 20);
+/**
+ * Helper: Extract unique template variable tokens matching {{variableName}}
+ * @param {string} text
+ * @returns {string[]} Unique array of placeholder token strings
+ */
+const extractPlaceholders = (text) => {
+    if (!text || typeof text !== "string") return [];
+    const matches = text.match(/\{\{\s*([a-zA-Z0-9_\-\s]+)\s*\}\}/g) || [];
+    const cleaned = matches
+        .map((match) => match.replace(/[\{\}]/g, "").trim())
+        .filter(Boolean);
+    return [...new Set(cleaned)];
 };
 
+/**
+ * @desc    Get paginated, filtered, and searched prompts for authenticated user
+ * @route   GET /api/v1/prompts
+ * @access  Private
+ */
 export const getPrompts = asyncHandler(async(req, res) => {
-    const { category, search, page = 1, limit = 10 } = req.query;
+    const { category, search, favorite, page = 1, limit = 10 } = req.query;
 
+    // Sanitize and bound pagination bounds strictly
     const pageNum = Math.max(1, parseInt(page, 10) || 1);
     const limitNum = Math.min(50, Math.max(1, parseInt(limit, 10) || 10));
     const skip = (pageNum - 1) * limitNum;
 
     const query = { user: req.user._id };
 
+    // Category Filter
     if (category && category !== "All" && typeof category === "string") {
         query.category = category.trim();
     }
 
-    if (search && typeof search === "string") {
-        const sanitizedSearch = search.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    // Favorite Filter
+    if (favorite !== undefined && favorite !== "") {
+        query.isFavorite = favorite === "true";
+    }
+
+    // Regex Search with Escaped Input to prevent ReDoS / Pattern Injection
+    if (search && typeof search === "string" && search.trim() !== "") {
+        const sanitizedSearch = search
+            .trim()
+            .replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        const searchRegex = new RegExp(sanitizedSearch, "i");
+
         query.$or = [
-            { title: { $regex: sanitizedSearch, $options: "i" } },
-            { body: { $regex: sanitizedSearch, $options: "i" } },
+            { title: { $regex: searchRegex } },
+            { content: { $regex: searchRegex } },
+            { description: { $regex: searchRegex } },
+            { tags: { $in: [searchRegex] } },
         ];
     }
 
+    // Execute database count and lean query concurrently for max performance
     const [prompts, total] = await Promise.all([
         Prompt.find(query)
         .sort({ createdAt: -1 })
@@ -53,104 +74,195 @@ export const getPrompts = asyncHandler(async(req, res) => {
             page: pageNum,
             limit: limitNum,
             totalPages: Math.ceil(total / limitNum),
+            hasNextPage: pageNum * limitNum < total,
+            hasPrevPage: pageNum > 1,
         },
     });
 });
 
-export const createPrompt = asyncHandler(async(req, res) => {
-    let { title, category, body, notes } = req.body;
-
-    if (!title || !body) {
-        res.status(400);
-        throw new Error("Title and body are required fields");
-    }
-
-    title = String(title).trim();
-    body = String(body).trim();
-    notes = notes ? String(notes).trim() : "";
-    category = category ? String(category).trim() : "General";
-
-    if (title.length > 100) {
-        res.status(400);
-        throw new Error("Title cannot exceed 100 characters");
-    }
-
-    if (notes.length > 500) {
-        res.status(400);
-        throw new Error("Notes cannot exceed 500 characters");
-    }
-
-    const variables = extractVariables(body);
-
-    const prompt = await Prompt.create({
-        user: req.user._id,
-        title,
-        category,
-        body,
-        variables,
-        notes,
-    });
-
-    res.status(201).json({
-        success: true,
-        data: prompt,
-    });
-});
-
-export const updatePrompt = asyncHandler(async(req, res) => {
+/**
+ * @desc    Get single prompt by ID
+ * @route   GET /api/v1/prompts/:id
+ * @access  Private
+ */
+export const getPromptById = asyncHandler(async(req, res) => {
     const { id } = req.params;
 
-    const prompt = await Prompt.findById(id);
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        res.status(400);
+        throw new Error("Invalid prompt ID format");
+    }
+
+    const prompt = await Prompt.findOne({ _id: id, user: req.user._id }).lean();
 
     if (!prompt) {
         res.status(404);
-        throw new Error("Prompt record not found");
+        throw new Error("Prompt not found in vault");
     }
 
-    if (prompt.user.toString() !== req.user._id.toString()) {
-        res.status(403);
-        throw new Error("Access forbidden: You do not own this resource");
+    res.status(200).json({ success: true, data: prompt });
+});
+
+/**
+ * @desc    Create a new user prompt with dynamic placeholder parsing
+ * @route   POST /api/v1/prompts
+ * @access  Private
+ */
+export const createPrompt = asyncHandler(async(req, res) => {
+    const { title, category, description, content, tags } = req.body;
+
+    // Strict Validation
+    if (!title || typeof title !== "string" || !title.trim()) {
+        res.status(400);
+        throw new Error("A valid prompt title is required");
     }
 
-    let { title, category, body, notes } = req.body;
+    if (!content || typeof content !== "string" || !content.trim()) {
+        res.status(400);
+        throw new Error("Prompt content cannot be empty");
+    }
 
-    if (title !== undefined) prompt.title = String(title).trim();
-    if (category !== undefined) prompt.category = String(category).trim();
-    if (notes !== undefined) prompt.notes = String(notes).trim();
+    const sanitizedTitle = title.trim();
+    const sanitizedContent = content.trim();
+    const sanitizedDescription =
+        typeof description === "string" ? description.trim() : "";
 
-    if (body !== undefined) {
-        prompt.body = String(body).trim();
-        prompt.variables = extractVariables(prompt.body);
+    // Sanitize tags
+    const sanitizedTags = Array.isArray(tags) ?
+        [
+            ...new Set(
+                tags
+                .filter((t) => typeof t === "string" && t.trim())
+                .map((t) => t.trim().toLowerCase())
+            ),
+        ] :
+        [];
+
+    // Parse {{placeholders}} automatically
+    const placeholders = extractPlaceholders(sanitizedContent);
+
+    const prompt = await Prompt.create({
+        user: req.user._id,
+        title: sanitizedTitle,
+        category: category && typeof category === "string" ? category.trim() : "General",
+        description: sanitizedDescription,
+        content: sanitizedContent,
+        tags: sanitizedTags,
+        placeholders,
+    });
+
+    res.status(201).json({ success: true, data: prompt });
+});
+
+/**
+ * @desc    Update existing prompt
+ * @route   PUT /api/v1/prompts/:id
+ * @access  Private
+ */
+export const updatePrompt = asyncHandler(async(req, res) => {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        res.status(400);
+        throw new Error("Invalid prompt ID format");
+    }
+
+    const prompt = await Prompt.findOne({ _id: id, user: req.user._id });
+
+    if (!prompt) {
+        res.status(404);
+        throw new Error("Prompt not found in vault");
+    }
+
+    const { title, category, description, content, tags } = req.body;
+
+    if (title !== undefined) {
+        if (typeof title !== "string" || !title.trim()) {
+            res.status(400);
+            throw new Error("Title cannot be blank");
+        }
+        prompt.title = title.trim();
+    }
+
+    if (content !== undefined) {
+        if (typeof content !== "string" || !content.trim()) {
+            res.status(400);
+            throw new Error("Content cannot be blank");
+        }
+        prompt.content = content.trim();
+        prompt.placeholders = extractPlaceholders(prompt.content);
+    }
+
+    if (category !== undefined && typeof category === "string") {
+        prompt.category = category.trim();
+    }
+
+    if (description !== undefined && typeof description === "string") {
+        prompt.description = description.trim();
+    }
+
+    if (tags !== undefined && Array.isArray(tags)) {
+        prompt.tags = [
+            ...new Set(
+                tags
+                .filter((t) => typeof t === "string" && t.trim())
+                .map((t) => t.trim().toLowerCase())
+            ),
+        ];
     }
 
     const updatedPrompt = await prompt.save();
 
-    res.status(200).json({
-        success: true,
-        data: updatedPrompt,
-    });
+    res.status(200).json({ success: true, data: updatedPrompt });
 });
 
-export const deletePrompt = asyncHandler(async(req, res) => {
+/**
+ * @desc    Toggle prompt favorite state
+ * @route   PATCH /api/v1/prompts/:id/favorite
+ * @access  Private
+ */
+export const toggleFavorite = asyncHandler(async(req, res) => {
     const { id } = req.params;
 
-    const prompt = await Prompt.findById(id);
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        res.status(400);
+        throw new Error("Invalid prompt ID format");
+    }
+
+    const prompt = await Prompt.findOne({ _id: id, user: req.user._id });
 
     if (!prompt) {
         res.status(404);
-        throw new Error("Prompt record not found");
+        throw new Error("Prompt not found in vault");
     }
 
-    if (prompt.user.toString() !== req.user._id.toString()) {
-        res.status(403);
-        throw new Error("Access forbidden: You do not own this resource");
+    prompt.isFavorite = !prompt.isFavorite;
+    await prompt.save();
+
+    res.status(200).json({ success: true, data: prompt });
+});
+
+/**
+ * @desc    Delete prompt from vault
+ * @route   DELETE /api/v1/prompts/:id
+ * @access  Private
+ */
+export const deletePrompt = asyncHandler(async(req, res) => {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        res.status(400);
+        throw new Error("Invalid prompt ID format");
     }
 
-    await prompt.deleteOne();
+    const prompt = await Prompt.findOneAndDelete({ _id: id, user: req.user._id });
 
-    res.status(200).json({
-        success: true,
-        data: { id },
-        message: "Prompt permanently deleted",
-    });
+    if (!prompt) {
+        res.status(404);
+        throw new Error("Prompt not found in vault");
+    }
+
+    res
+        .status(200)
+        .json({ success: true, message: "Prompt permanently removed from vault" });
 });
