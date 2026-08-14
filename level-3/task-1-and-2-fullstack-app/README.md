@@ -1,4 +1,4 @@
-﻿````markdown
+﻿
 # DevVolt Client
 
 A React frontend for DevVolt—a developer workspace built for organizing, testing, and filling dynamic AI prompt templates. Built with React 18, Vite, Tailwind CSS, and React Router v6.
@@ -20,7 +20,7 @@ Here are the refined sections updated with your exact file structure, along with
 
 ## Directory Structure
 
-``text
+```
 src/
 ├── api/
 │   └── axios.js             # Pre-configured Axios instance with authorization headers
@@ -53,7 +53,6 @@ src/
 ├── App.jsx                  # Primary route definition table and route guard configuration
 └── main.jsx                 # Application entry point with BrowserRouter & AuthProvider wrap
 ```
-````
 
 ---
 
@@ -164,7 +163,7 @@ npm install
 
 ```env
 VITE_API_BASE_URL=http://localhost:5000/api
-...rest of env.example config.
+...rest of .env.example config.
 ```
 
 4. Start the development server:
