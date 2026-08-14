@@ -1,4 +1,3 @@
----
 ```markdown
 # Level 1: Static Architecture & Interactive Performance Engine
 
@@ -34,8 +33,6 @@ level-1/
             └── validator.js       # Native client-side form validation logic
 ```
 
-
----
 
 ## 🛠️ Tasks Breakdown
 
