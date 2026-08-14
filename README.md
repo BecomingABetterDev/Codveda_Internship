@@ -1,97 +1,123 @@
-````
-# Web Development Internship Workspace
+---
 
-This repository holds all my completed tasks for the web development internship program. Each level is organized into dedicated directories, starting from pure CSS architecture to interactive dynamic interfaces.
+````markdown
+# Web Engineering Internship Workspace
 
-## 📂 Repository Structure
+A production-focused monorepo documenting progression across web development architecture—from native browser APIs and zero-dependency performance engines to component-driven React dashboards and full-stack application systems.
+
+---
+
+## 📂 Repository Architecture
 
 ```text
 .
-├── level-1/
-│   ├── task-1-static-agency/      # Base static platform built with pure HTML & CSS
-│   │   ├── index.html
-│   │   ├── about.html
-│   │   ├── contact.html
-│   │   └── assets/
-│   │       ├── css/               # Modern CSS layout engine & variables
-│   │       └── images/
-│   └── task-3-interactive-hub/    # Performance engine & interactive sandbox
-│       ├── index.html
-│       ├── about.html
-│       ├── contact.html
-│       └── assets/
-│           ├── css/
-│           ├── images/
-│           └── js/                # Native ES6+ script logic (sandbox & validation)
-├── .gitignore
-└── README.md
+├── level-1/                            # Level 1: Native Web Standards & Performance
+│   ├── task-1-static-agency/           # Semantic HTML5 & CSS variable agency platform
+│   └── task-3-interactive-hub/         # Vanilla JS performance budget engine & canvas physics
+│
+├── level-2/                            # Level 2: Component Architecture & Live Data
+│   └── task-1-and-3-weather-app/       # AeroCast: React 18 weather dashboard & custom SVG charting
+│
+├── level-3/                            # Level 3: Full-Stack Platform Engineering
+│   └── task-1-and-2-fullstack-app/     # DevVolt: Full-stack prompt engineering workspace
+│       ├── client/                     # React 18 frontend with Tailwind CSS & React Router v6
+│       └── server/                     # Node.js/Express REST API with JWT auth & MongoDB Atlas
+│
+└── README.md                           # Master workspace documentation
+```
 
 ````
 
 ---
 
-## 🚀 Level 1 Overview
+## 🛠️ Level Breakdown & Engineering Roadmap
 
-Level 1 focuses on building a modern agency landing platform (**SpeedCraft Labs**). The project demonstrates how far native web APIs can go without relying on third-party frameworks or heavy script libraries.
+### [Level 1: Native Web Standards & Interactive Engines](https://www.google.com/search?q=./level-1)
 
-### Task 1: Modern Static Agency Website (`task-1-static-agency`)
+Focuses on building high-performance interfaces using pure web APIs, zero build tools, and no external third-party dependencies.
 
-Focuses on semantic HTML structure, responsive layouts, and modern CSS practices.
-
-- **CSS Custom Properties**: Global design tokens (`variables.css`) manage color themes, typography scales, and structural spacing across all pages.
-- **Layout Systems**: Built using a hybrid of CSS Grid and Flexbox to ensure clean alignment on desktop, tablet, and mobile viewports.
-- **Semantic Structure**: Built with clear HTML tags (`main`, `section`, `article`, `header`, `footer`) for accessibility and structured page hierarchies.
-- **Multi-Page Setup**: Fully styled Home, About, and Contact layouts with shared header navigation and responsive layout wrappers.
-
-### Task 3: Interactive Engine & Performance Sandbox (`task-3-interactive-hub`)
-
-Upgrades the base agency site into a dynamic, performance-focused experience using plain JavaScript.
-
-- **Performance Budget Simulator**: An interactive page-weight slider (`sandBox.js`) that dynamically calculates estimated Largest Contentful Paint (LCP) and user retention metrics while streaming diagnostic updates to an interactive terminal interface.
-- **Hardware-Accelerated Pointer Physics**: A custom cursor tracking system built using `requestAnimationFrame` render loops for smooth pointer movement without layout thrashing.
-- **Interactive Canvas Mesh**: An animated particle network rendered dynamically on a background HTML5 `<canvas>`.
-- **Intersection Observer Animations**: On-scroll reveal effects and animated metric counters triggered only when elements enter the viewport.
-- **Client-Side Form Handling**: Real-time form validation (`validator.js`) and dynamic system notification toasts to handle missing fields cleanly.
+- **Task 1 (Static Agency Platform)**: Multi-page agency site (**SpeedCraft Labs**) utilizing semantic HTML5 tags, hybrid CSS Grid/Flexbox layouts, and global design tokens managed in `variables.css`.
+- **Task 3 (Interactive Engine & Sandbox)**: Features a real-time Performance Budget Simulator calculating estimated LCP timings and streaming diagnostic logs to a custom DOM console, hardware-accelerated pointer physics via `requestAnimationFrame`, an HTML5 particle canvas mesh, and `IntersectionObserver` scroll animations.
 
 ---
 
-## 🛠️ Built With
+### [Level 2: AeroCast Weather Dashboard](https://www.google.com/search?q=./level-2/task-1-and-3-weather-app)
 
-- **HTML5**: Semantic tags, accessible forms, and native markup.
-- **Modern CSS3**: CSS Variables, CSS Grid, Flexbox, and `backdrop-filter` effects.
-- **Vanilla JavaScript (ES6+)**: Canvas API, `requestAnimationFrame`, `IntersectionObserver`, and DOM manipulation.
+Focuses on modern frontend engineering with React 18, Vite, and live asynchronous data streams.
+
+- **Feature-Sliced Architecture**: Codebase isolated by domain (`features/search`, `features/weather`, `shared`) to optimize code maintainability and long-term scaling.
+- **Debounced Geocoding & Request Guarding**: Custom `useGeocoding` hook implementing a 400ms search debounce, `Map`-backed query caching, and `AbortController` cancellation for rapid user inputs.
+- **Zero-Dependency SVG Graph Engine**: Custom Catmull-Rom spline algorithms mapping discrete hourly temperature/precipitation API data directly into smooth SVG paths without external charting libraries.
+- **Persistence & Context**: Local storage synchronization for temperature scale preferences (`°C` / `°F`) and city defaults.
+
+---
+
+### [Level 3: DevVolt Full-Stack Workspace](https://www.google.com/search?q=./level-3/task-1-and-2-fullstack-app)
+
+Focuses on end-to-end full-stack software development, RESTful API design, authentication state management, and user data persistence.
+
+- **Client Architecture (`/client`)**: React 18 single-page application built with Vite and Tailwind CSS. Implements guarded routing (`React Router v6`), centralized auth context (`AuthContext`), and custom UI modals (`PromptModal`) that parse dynamic token placeholders (`{{variable_name}}`) into real-time input fields.
+- **Server Architecture (`/server`)**: Modular Node.js & Express REST API using MongoDB Atlas (via Mongoose). Integrates bcrypt password hashing, stateless JWT authentication, centralized middleware error handling, and robust CORS/environment security.
+
+---
+
+## ⚡ Technical Matrix
+
+| Level       | Scope              | Core Technologies                             | Key Architecture Concepts                                                          |
+| ----------- | ------------------ | --------------------------------------------- | ---------------------------------------------------------------------------------- |
+| **Level 1** | Native Frontend    | HTML5, Modern CSS3, Vanilla JS (ES6+)         | CSS Custom Properties, Canvas API, `requestAnimationFrame`, `IntersectionObserver` |
+| **Level 2** | React Architecture | React 18, Vite, Scoped CSS, Open-Meteo API    | Feature-Sliced design, debounced API caching, Catmull-Rom SVG path mathematics     |
+| **Level 3** | Full-Stack System  | React 18, Node.js, Express, MongoDB, Tailwind | JWT session handling, protected layout guards, dynamic token parsing               |
 
 ---
 
 ## 💻 Local Setup & Development
 
-To view or test the project locally, clone the repository and serve the files directly using any browser:
+Refer to the individual `README.md` files in each directory for granular execution instructions.
+
+### Quick Start Shortcuts
+
+1. **Level 1 (Static Engine)**:
 
 ```bash
-# Clone the repository
-git clone [https://github.com/your-username/your-repo-name.git](https://github.com/your-username/your-repo-name.git)
-
-# Navigate into the project folder
-cd your-repo-name
-
-# Open Task 1 in your browser
-open level-1/task-1-static-agency/index.html
-
-# Open Task 3 in your browser
+# Open directly in browser without installation
 open level-1/task-3-interactive-hub/index.html
 
 ```
 
-_Tip: You can also use VS Code's **Live Server** extension to preview pages with hot-reloading._
+2. **Level 2 (AeroCast Dashboard)**:
+
+```bash
+cd level-2/task-1-and-3-weather-app
+npm install
+npm run dev
+
+```
+
+3. **Level 3 (DevVolt Full-Stack)**:
+
+```bash
+# Terminal 1: Start Backend API
+cd level-3/task-1-and-2-fullstack-app/server
+npm install
+npm run dev
+
+# Terminal 2: Start Frontend Client
+cd level-3/task-1-and-2-fullstack-app/client
+npm install
+npm run dev
+
+```
 
 ---
 
-## 📌 Development Notes
+## 📌 Engineering Principles
 
-- **Zero Framework Overhead**: Everything runs natively in the browser without build tools like Vite, Webpack, or npm packages.
-- **Scoped Styling**: Interactive layouts are isolated using clear class namespaces (such as `.sandbox__grid`) to avoid conflicting with standard site pages.
-- **Performance Focused**: All scripts are lightweight and defer non-critical calculations until triggered by user actions.
-
-```
+- **Native Standards First**: Maximum performance is achieved by mastering low-level browser APIs before introducing frameworks.
+- **Zero unnecessary bloat**: Heavy third-party packages are avoided whenever native mathematics, standard web APIs, or simple custom utilities can achieve the same result cleanly.
+- **Scalable Directory Hygiene**: Strict isolation of global styling, feature modules, and client-server boundaries across all project directories.
 
 ```
+
+```
+````
