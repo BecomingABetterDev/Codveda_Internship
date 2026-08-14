@@ -1,6 +1,5 @@
 ---
-
-````markdown
+```markdown
 # Level 1: Static Architecture & Interactive Performance Engine
 
 This level focuses on core web standards—building a modern digital agency platform (**SpeedCraft Labs**) using native web APIs. The goal was to build layout systems, interactive particle physics, and performance simulation tools without relying on external libraries, JavaScript frameworks, or build tools.
@@ -35,7 +34,6 @@ level-1/
             └── validator.js       # Native client-side form validation logic
 ```
 
-````
 
 ---
 
