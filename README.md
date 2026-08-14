@@ -1,5 +1,5 @@
 ---
-``markDown
+
 # Web Engineering Internship Workspace
 
 A production-focused monorepo documenting progression across web development architecture—from native browser APIs and zero-dependency performance engines to component-driven React dashboards and full-stack application systems.
@@ -8,7 +8,7 @@ A production-focused monorepo documenting progression across web development arc
 
 ## 📂 Repository Architecture
 
-``
+```
 .
 ├── level-1/                            # Level 1: Native Web Standards & Performance
 │   ├── task-1-static-agency/           # Semantic HTML5 & CSS variable agency platform
@@ -25,7 +25,7 @@ A production-focused monorepo documenting progression across web development arc
 └── README.md                           # Master workspace documentation
 ```
 
-````
+``
 
 ---
 
