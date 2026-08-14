@@ -18,10 +18,9 @@ Here are the refined sections updated with your exact file structure, along with
 
 ---
 
-````markdown
 ## Directory Structure
 
-```text
+``text
 src/
 ├── api/
 │   └── axios.js             # Pre-configured Axios instance with authorization headers
@@ -54,7 +53,6 @@ src/
 ├── App.jsx                  # Primary route definition table and route guard configuration
 └── main.jsx                 # Application entry point with BrowserRouter & AuthProvider wrap
 ```
-````
 ````
 
 ---
@@ -134,7 +132,7 @@ In `App.jsx`, routes are divided into two operational scopes:
 
 Authenticated requests pass through `ProtectedLayout` into `AppShell`. `AppShell` houses the global application layout (`Header` and `SideBar`) while embedding nested page components (`Dashboard`, `PromptVault`, `PromptBuilder`, `AddPrompt`, and `SettingsView`). Modals operate on top of this structure, driven by localized component state (`PromptModal`, `ProfileModal`, `EditPromptModal`, `DeleteModal`) without unmounting active view routes.
 
-````
+``
 
 ---
 
@@ -206,7 +204,7 @@ npm run preview
 - **React Hot Toast**: Unobtrusive toast feedback for user actions.
 - **Tailwind CSS**: Utility-first styling for dark mode layouts.
 
-```
+``
  Thank you for your visit!
 Portfolio: https://eyob-dportfolio.vercel.app
 
