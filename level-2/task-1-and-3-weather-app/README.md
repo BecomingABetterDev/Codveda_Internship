@@ -1,4 +1,4 @@
-````markdown
+
 # Level 2 — AeroCast Weather Dashboard
 
 This directory contains the completed Level 2 project (`task-1-and-3-weather-app`), combining both the baseline React application setup and advanced interactive weather dashboard features into a single production-ready project.
