@@ -1,6 +1,5 @@
 ---
 
-````markdown
 # Web Engineering Internship Workspace
 
 A production-focused monorepo documenting progression across web development architecture—from native browser APIs and zero-dependency performance engines to component-driven React dashboards and full-stack application systems.
@@ -9,7 +8,7 @@ A production-focused monorepo documenting progression across web development arc
 
 ## 📂 Repository Architecture
 
-```text
+``
 .
 ├── level-1/                            # Level 1: Native Web Standards & Performance
 │   ├── task-1-static-agency/           # Semantic HTML5 & CSS variable agency platform
@@ -96,7 +95,7 @@ npm run dev
 
 3. **Level 3 (DevVolt Full-Stack)**:
 
-```bash
+``
 # Terminal 1: Start Backend API
 cd level-3/task-1-and-2-fullstack-app/server
 npm install
@@ -107,7 +106,7 @@ cd level-3/task-1-and-2-fullstack-app/client
 npm install
 npm run dev
 
-```
+``
 
 ---
 
