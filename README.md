@@ -1,5 +1,5 @@
 ---
-
+``markDown
 # Web Engineering Internship Workspace
 
 A production-focused monorepo documenting progression across web development architecture—from native browser APIs and zero-dependency performance engines to component-driven React dashboards and full-stack application systems.
