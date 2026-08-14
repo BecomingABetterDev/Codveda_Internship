@@ -1,4 +1,4 @@
-```markdown
+
 # Level 1: Static Architecture & Interactive Performance Engine
 
 This level focuses on core web standards—building a modern digital agency platform (**SpeedCraft Labs**) using native web APIs. The goal was to build layout systems, interactive particle physics, and performance simulation tools without relying on external libraries, JavaScript frameworks, or build tools.
@@ -7,7 +7,7 @@ This level focuses on core web standards—building a modern digital agency plat
 
 ## 📂 Level 1 Directory Structure
 
-```text
+```
 level-1/
 ├── task-1-static-agency/          # Pure HTML5 & CSS3 agency website
 │   ├── index.html                 # Landing page & service hero
